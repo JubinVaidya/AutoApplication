@@ -16,19 +16,19 @@ namespace AutoApplication.DataLibrary.BusinessLogic
             Auto data = new Auto
             {
                 AutoID = autoId,
-                AutoMaker = autoMaker,
+                AutoMakerName = autoMaker,
                 AutoModelName = autoModelName,
                 AutoModelYear = autoModelYear
             };
-            string sql = @"insert into dbo.Autos (AutoID, AutoMaker, AutoModelName, AutoModelYear) 
-                           values (@AutoID, @AutoMaker, @AutoModelName, @AutoModelYear)";
+            string sql = @"insert into dbo.Autos (AutoID, AutoMakerName, AutoModelName, AutoModelYear) 
+                           values (@AutoID, @AutoMakerName, @AutoModelName, @AutoModelYear)";
             return SqlServerDataAccess.SaveData(sql, data);
         }
 
-        public static List<Auto> LoadAutos()
+        public static IList<Auto> LoadAutos()
         {
             string sql = AutoStoredProceduresNames.GetAllAutos;
-            return SqlServerDataAccess.LoadData<Auto>(sql).ToList();
+            return SqlServerDataAccess.LoadData<Auto>(sql);
         }
 
     }

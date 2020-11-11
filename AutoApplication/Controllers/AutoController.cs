@@ -14,29 +14,39 @@ namespace AutoApplication.Controllers
     public class AutoController : Controller
     {
         IAuto _auto;
-
-        public AutoController(IAuto auto)
+        IList<Auto> _listOfAutos;
+        public AutoController(IAuto auto, IList<Auto> listOfAutos)
         {
             _auto = auto;
+            _listOfAutos = listOfAutos;
         }
 
-        // GET: Auto
+        /// <summary>
+        /// This Method will query the database for all autos and display it in the view.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            _auto.AutoID = 101;
-            _auto.AutoMaker = "Toyota";
-            _auto.AutoModelName = "Camry";
-            _auto.AutoModelYear = "2010";
+            var data =AutoDataProcessor.LoadAutos();
+            foreach(var auto in data)
+            {
+                _listOfAutos.Add(new Auto
+                {
+                    AutoID = auto.AutoID,
+                    AutoMakerName = auto.AutoMakerName,
+                    AutoModelName = auto.AutoModelName,
+                    AutoModelYear = auto.AutoModelYear,
+                    AutoListedPrice = auto.AutoListedPrice,
+                    AutoUsageStatus = auto.AutoUsageStatus,
+                    AutoVinNumber = auto.AutoVinNumber
+                });
+            }
 
-            //trying in dummy data
-            var k  = AutoDataProcessor.LoadAutos();
-            ;
 
-
-
-            return View(_auto);
+            return View(_listOfAutos);
         }
 
+        
 
 
 
