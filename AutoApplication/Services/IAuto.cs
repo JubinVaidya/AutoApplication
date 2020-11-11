@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AutoApplication.Services
 {
-    interface IAuto
+    public interface IAuto
     {
+        int AutoID { get; set; }
+        string AutoModelName { get; set; }
+        string AutoMaker { get; set; }
+        string AutoModelYear { get; set; }
     }
 }
