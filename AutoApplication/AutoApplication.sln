@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoApplication", "AutoAppl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoApplication.Tests", "..\AutoApplication.Tests\AutoApplication.Tests.csproj", "{C6FDA73D-4E06-4809-A2D7-607A648071BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoApplication.DataLibrary", "..\AutoApplication.DataLibrary\AutoApplication.DataLibrary.csproj", "{990797E5-1629-4358-89DE-A97ABAF7557E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C6FDA73D-4E06-4809-A2D7-607A648071BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6FDA73D-4E06-4809-A2D7-607A648071BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6FDA73D-4E06-4809-A2D7-607A648071BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990797E5-1629-4358-89DE-A97ABAF7557E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990797E5-1629-4358-89DE-A97ABAF7557E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990797E5-1629-4358-89DE-A97ABAF7557E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990797E5-1629-4358-89DE-A97ABAF7557E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

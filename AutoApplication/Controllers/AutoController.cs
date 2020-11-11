@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoApplication.DataLibrary;
+using AutoApplication.DataLibrary.DataAccess;
+using AutoApplication.DataLibrary.BusinessLogic;
 
 namespace AutoApplication.Controllers
 {
@@ -20,11 +23,16 @@ namespace AutoApplication.Controllers
         // GET: Auto
         public ActionResult Index()
         {
-            //trying in dummy data
             _auto.AutoID = 101;
             _auto.AutoMaker = "Toyota";
             _auto.AutoModelName = "Camry";
             _auto.AutoModelYear = "2010";
+
+            //trying in dummy data
+            var k  = AutoDataProcessor.LoadAutos();
+            ;
+
+
 
             return View(_auto);
         }
