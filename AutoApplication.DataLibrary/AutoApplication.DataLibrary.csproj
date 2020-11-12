@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{990797E5-1629-4358-89DE-A97ABAF7557E}</ProjectGuid>
+    <ProjectGuid>{7B96A5B5-F68C-444A-83CB-F00C604230CA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AutoApplication.DataLibrary</RootNamespace>
@@ -50,13 +50,22 @@
     <Compile Include="BusinessLogic\AutoBusinessLogic\IAutoDataProcessor.cs" />
     <Compile Include="DataAccessServices\ISqlServerFindData.cs" />
     <Compile Include="DataAccess\SqlServerConnection.cs" />
-    <Compile Include="DataAccess\SqlServerFindData.cs" />
     <Compile Include="DataAccess\SqlServerDataModification.cs" />
+    <Compile Include="DataAccess\SqlServerFindData.cs" />
+    <Compile Include="ModelServices\IAuto.cs" />
     <Compile Include="Model\Auto.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

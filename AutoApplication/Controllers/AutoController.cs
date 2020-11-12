@@ -1,15 +1,7 @@
-﻿using AutoApplication.Models;
-using AutoApplication.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using AutoApplication.DataLibrary;
-using AutoApplication.DataLibrary.DataAccess;
-using AutoApplication.DataLibrary.BusinessLogic;
-using AutoApplication.DataLibrary.DataAccessServices;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
+using AutoApplication.DataLibrary.Model;
 
 namespace AutoApplication.Controllers
 {
@@ -32,7 +24,7 @@ namespace AutoApplication.Controllers
         public ActionResult Index()
         {
             var data = _autoDataProcessor.LoadAutos();
-            foreach(var auto in data)
+            foreach (var auto in data)
             {
                 _listOfAutos.Add(new Auto
                 {
@@ -49,10 +41,6 @@ namespace AutoApplication.Controllers
 
             return View(_listOfAutos);
         }
-
-        
-
-
 
     }
 }

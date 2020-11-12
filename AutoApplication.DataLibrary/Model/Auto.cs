@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoApplication.DataLibrary.ModelServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutoApplication.DataLibrary.Model
 {
-    public class Auto
+    public class Auto : IAuto
     {
         public int AutoID { get; set; }
         public string AutoModelName { get; set; }
