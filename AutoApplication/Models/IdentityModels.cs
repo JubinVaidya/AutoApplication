@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -21,7 +22,7 @@ namespace AutoApplication.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base(ConfigurationManager.ConnectionStrings["AutoDealerVaidyaDB"].ConnectionString, throwIfV1Schema: false)
         {
         }
 
