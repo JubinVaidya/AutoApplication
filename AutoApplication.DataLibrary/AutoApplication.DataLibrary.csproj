@@ -47,8 +47,11 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoDataProcessor.cs" />
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoStoredProceduresNames.cs" />
+    <Compile Include="BusinessLogic\AutoBusinessLogic\IAutoDataProcessor.cs" />
+    <Compile Include="DataAccessServices\ISqlServerFindData.cs" />
     <Compile Include="DataAccess\SqlServerConnection.cs" />
-    <Compile Include="DataAccess\SqlServerDataAccess.cs" />
+    <Compile Include="DataAccess\SqlServerFindData.cs" />
+    <Compile Include="DataAccess\SqlServerDataModification.cs" />
     <Compile Include="Model\Auto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

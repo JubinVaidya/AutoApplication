@@ -1,5 +1,6 @@
 ﻿using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.DataAccess;
+using AutoApplication.DataLibrary.DataAccessServices;
 using AutoApplication.DataLibrary.Model;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,33 @@ using System.Threading.Tasks;
 
 namespace AutoApplication.DataLibrary.BusinessLogic
 {
-    public static class AutoDataProcessor
+    public class AutoDataProcessor : IAutoDataProcessor
     {
-        public static int AddAuto(int autoId, string autoMaker, string autoModelName, string autoModelYear)
+        ISqlServerFindData _sqlServerFindData;
+
+        public AutoDataProcessor(ISqlServerFindData sqlServerFindData)
         {
-            Auto data = new Auto
-            {
-                AutoID = autoId,
-                AutoMakerName = autoMaker,
-                AutoModelName = autoModelName,
-                AutoModelYear = autoModelYear
-            };
-            string sql = @"insert into dbo.Autos (AutoID, AutoMakerName, AutoModelName, AutoModelYear) 
-                           values (@AutoID, @AutoMakerName, @AutoModelName, @AutoModelYear)";
-            return SqlServerDataAccess.SaveData(sql, data);
+            _sqlServerFindData = sqlServerFindData;
         }
 
-        public static IList<Auto> LoadAutos()
+        //public static int AddAuto(int autoId, string autoMaker, string autoModelName, string autoModelYear)
+        //{
+        //    Auto data = new Auto
+        //    {
+        //        AutoID = autoId,
+        //        AutoMakerName = autoMaker,
+        //        AutoModelName = autoModelName,
+        //        AutoModelYear = autoModelYear
+        //    };
+        //    string sql = @"insert into dbo.Autos (AutoID, AutoMakerName, AutoModelName, AutoModelYear) 
+        //                   values (@AutoID, @AutoMakerName, @AutoModelName, @AutoModelYear)";
+        //    return SqlServerFindData.SaveData(sql, data);
+        //}
+
+        public IList<Auto> LoadAutos()
         {
             string sql = AutoStoredProceduresNames.GetAllAutos;
-            return SqlServerDataAccess.LoadData<Auto>(sql);
+            return _sqlServerFindData.FindData<Auto>(sql);
         }
 
     }

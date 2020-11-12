@@ -8,18 +8,22 @@ using System.Web.Mvc;
 using AutoApplication.DataLibrary;
 using AutoApplication.DataLibrary.DataAccess;
 using AutoApplication.DataLibrary.BusinessLogic;
+using AutoApplication.DataLibrary.DataAccessServices;
+using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 
 namespace AutoApplication.Controllers
 {
     public class AutoController : Controller
     {
-        IAuto _auto;
-        IList<Auto> _listOfAutos;
-        public AutoController(IAuto auto, IList<Auto> listOfAutos)
+        IAutoDataProcessor _autoDataProcessor;
+        List<Auto> _listOfAutos;
+
+        public AutoController(IAutoDataProcessor autoDataProcessor)
         {
-            _auto = auto;
-            _listOfAutos = listOfAutos;
+            _autoDataProcessor = autoDataProcessor;
+            _listOfAutos = new List<Auto>();
         }
+
 
         /// <summary>
         /// This Method will query the database for all autos and display it in the view.
@@ -27,7 +31,7 @@ namespace AutoApplication.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var data =AutoDataProcessor.LoadAutos();
+            var data = _autoDataProcessor.LoadAutos();
             foreach(var auto in data)
             {
                 _listOfAutos.Add(new Auto

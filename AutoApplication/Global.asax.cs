@@ -1,4 +1,8 @@
-﻿using AutoApplication.Models;
+﻿using AutoApplication.DataLibrary.BusinessLogic;
+using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
+using AutoApplication.DataLibrary.DataAccess;
+using AutoApplication.DataLibrary.DataAccessServices;
+using AutoApplication.Models;
 using AutoApplication.Services;
 using Autofac;
 using Autofac.Integration.Mvc;
@@ -21,6 +25,10 @@ namespace AutoApplication
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Auto>().As<IAuto>();
+            
+            builder.RegisterType<SqlServerFindData>().As<ISqlServerFindData>();
+
+            builder.RegisterType<AutoDataProcessor>().As<IAutoDataProcessor>();
 
             //Registration of interfaces to models
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsSelf().AsImplementedInterfaces();
