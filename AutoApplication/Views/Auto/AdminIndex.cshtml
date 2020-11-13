@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AutoApplication.DataLibrary.Model.Auto>
+
+@{
+    ViewBag.Title = "AdminIndex";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoModelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoMakerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoModelYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoUsageStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoListedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoVinNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoMakerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoModelYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoUsageStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoListedPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoVinNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AutoID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AutoID })
+            </td>
+        </tr>
+    }
+
+</table>
+

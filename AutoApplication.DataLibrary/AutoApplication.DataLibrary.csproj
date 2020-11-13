@@ -48,6 +48,7 @@
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoDataProcessor.cs" />
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoStoredProceduresNames.cs" />
     <Compile Include="BusinessLogic\AutoBusinessLogic\IAutoDataProcessor.cs" />
+    <Compile Include="BusinessLogic\CompanyRoles.cs" />
     <Compile Include="DataAccessServices\ISqlServerFindData.cs" />
     <Compile Include="DataAccess\SqlServerConnection.cs" />
     <Compile Include="DataAccess\SqlServerDataModification.cs" />

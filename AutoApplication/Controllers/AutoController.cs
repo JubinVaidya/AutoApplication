@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using AutoApplication.DataLibrary.BusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.Model;
 
@@ -21,8 +22,11 @@ namespace AutoApplication.Controllers
         /// This Method will query the database for all autos and display it in the view.
         /// </summary>
         /// <returns></returns>
+        /// 
+
         public ActionResult Index()
         {
+
             var data = _autoDataProcessor.LoadAutos();
             foreach (var auto in data)
             {
@@ -38,8 +42,11 @@ namespace AutoApplication.Controllers
                 });
             }
 
+            if (User.IsInRole(CompanyRoles.AdminRole))
+                return View("AdminIndex", _listOfAutos);
+            else
+                return View("EmployeeIndex", _listOfAutos);
 
-            return View(_listOfAutos);
         }
 
     }
