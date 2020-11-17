@@ -30,5 +30,9 @@ namespace AutoApplication.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<AutoApplication.DataLibrary.Model.Sale> Sales { get; set; }
+
+        public System.Data.Entity.DbSet<AutoApplication.DataLibrary.Model.Auto> Auto { get; set; }
     }
 }

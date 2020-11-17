@@ -49,13 +49,19 @@
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoStoredProceduresNames.cs" />
     <Compile Include="BusinessLogic\AutoBusinessLogic\IAutoDataProcessor.cs" />
     <Compile Include="BusinessLogic\CompanyRoles.cs" />
+    <Compile Include="BusinessLogic\UserBusinessLogic\IUserDataProcessor.cs" />
+    <Compile Include="BusinessLogic\UserBusinessLogic\UserDataProcessor.cs" />
+    <Compile Include="BusinessLogic\UserBusinessLogic\UserStoredProceduresNames.cs" />
     <Compile Include="DataAccessServices\ISqlServerFindData.cs" />
     <Compile Include="DataAccess\SqlServerConnection.cs" />
     <Compile Include="DataAccess\SqlServerDataModification.cs" />
     <Compile Include="DataAccess\SqlServerFindData.cs" />
     <Compile Include="ModelServices\IAuto.cs" />
+    <Compile Include="ModelServices\ICustomer.cs" />
+    <Compile Include="ModelServices\ISale.cs" />
     <Compile Include="Model\Auto.cs" />
-    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Sale.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

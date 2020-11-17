@@ -9,5 +9,6 @@ namespace AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic
     public static class AutoStoredProceduresNames
     {
         public static string GetAllAutos { get { return "dbo.spAutos_GetAll"; } }
+        public static string GetAutoByID { get { return "dbo.spAutos_GetAutoByID @AutoID"; } }
     }
 }

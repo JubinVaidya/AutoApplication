@@ -1,4 +1,5 @@
 ﻿using AutoApplication.DataLibrary.DataAccessServices;
+using AutoApplication.DataLibrary.Model;
 using Dapper;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,14 @@ namespace AutoApplication.DataLibrary.DataAccess
                 return cnn.Query<T>(sql).ToList();
             }
         }
+
+        public IList<T> FindData<T>(string sql, int id)
+        {
+            using (IDbConnection cnn = new SqlConnection(SqlServerConnection.CnnValue()))
+            {
+                return cnn.Query<T>(sql, new {@AutoID = id }).ToList();
+            };
+        }
+
     }
 }

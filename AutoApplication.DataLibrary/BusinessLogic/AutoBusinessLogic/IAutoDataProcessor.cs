@@ -10,5 +10,6 @@ namespace AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic
     public interface IAutoDataProcessor
     {
         IList<Auto> LoadAutos();
+        Task<IList<Auto>> FindAutoAsync(int id);
     }
 }

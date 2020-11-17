@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AutoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +219,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\AutoSalesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -380,6 +382,14 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Auto\EmployeeIndex.cshtml" />
     <Content Include="Views\Auto\AdminIndex.cshtml" />
+    <Content Include="Views\Home\AdminHomeView.cshtml" />
+    <Content Include="Views\Home\EmployeeHomeView.cshtml" />
+    <Content Include="Views\Auto\Details.cshtml" />
+    <Content Include="Views\Auto\Create.cshtml" />
+    <Content Include="Views\Auto\Delete.cshtml" />
+    <Content Include="Views\Auto\Edit.cshtml" />
+    <Content Include="Views\Auto\Index.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

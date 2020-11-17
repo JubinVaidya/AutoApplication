@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoApplication.DataLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,9 @@ namespace AutoApplication.DataLibrary.DataAccessServices
     public interface ISqlServerFindData
     {
        IList<T> FindData<T>(string sql);
+
+       IList<T> FindData<T>(string sql, int id);
+
 
     }
 }

@@ -19,6 +19,14 @@ namespace AutoApplication.DataLibrary.BusinessLogic
             _sqlServerFindData = sqlServerFindData;
         }
 
+        public async Task<IList<Auto>> FindAutoAsync(int id)
+        {
+            string sql = AutoStoredProceduresNames.GetAutoByID;
+            
+            return await Task.Run(() => _sqlServerFindData.FindData<Auto>(sql, id));
+
+        }
+
         //public static int AddAuto(int autoId, string autoMaker, string autoModelName, string autoModelYear)
         //{
         //    Auto data = new Auto
@@ -27,7 +35,7 @@ namespace AutoApplication.DataLibrary.BusinessLogic
         //        AutoMakerName = autoMaker,
         //        AutoModelName = autoModelName,
         //        AutoModelYear = autoModelYear
-        //    };
+        //    }
         //    string sql = @"insert into dbo.Autos (AutoID, AutoMakerName, AutoModelName, AutoModelYear) 
         //                   values (@AutoID, @AutoMakerName, @AutoModelName, @AutoModelYear)";
         //    return SqlServerFindData.SaveData(sql, data);

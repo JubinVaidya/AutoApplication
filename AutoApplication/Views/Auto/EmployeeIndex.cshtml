@@ -51,7 +51,7 @@
                 @Html.DisplayFor(modelItem => item.AutoVinNumber)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.AutoID }) |
+                @Html.ActionLink("Details", "Details", "Auto", new { id = item.AutoID }, null) 
             </td>
         </tr>
     }

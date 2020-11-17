@@ -5,6 +5,7 @@ using AutoApplication.DataLibrary.DataAccessServices;
 using AutoApplication.DataLibrary.Model;
 using AutoApplication.DataLibrary.ModelServices;
 using AutoApplication.Models;
+using AutoApplication.ViewModel;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Microsoft.AspNet.Identity;
@@ -34,6 +35,11 @@ namespace AutoApplication
 
 
             builder.RegisterType<Auto>().As<IAuto>();
+            builder.RegisterType<Customer>().As<ICustomer>();
+            builder.RegisterType<Sale>().As<ISale>();
+
+            builder.RegisterType<AutoSalesViewModel>();
+
             builder.RegisterType<SqlServerFindData>().As<ISqlServerFindData>();
             builder.RegisterType<AutoDataProcessor>().As<IAutoDataProcessor>();
 

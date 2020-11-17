@@ -1,7 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AutoApplication.Models;
+using AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic;
 
 namespace AutoApplication.Controllers
 {
@@ -18,12 +17,14 @@ namespace AutoApplication.Controllers
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
         private readonly IAuthenticationManager _authManager;
+        private readonly IUserDataProcessor _userDataProcessor;
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IAuthenticationManager authManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _authManager = authManager;
+        
         }
 
 
@@ -76,11 +77,13 @@ namespace AutoApplication.Controllers
                 return View(model);
             }
 
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
+
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:

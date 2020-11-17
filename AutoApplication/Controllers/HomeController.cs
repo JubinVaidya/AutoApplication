@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoApplication.DataLibrary.BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,14 @@ namespace AutoApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(CompanyRoles.AdminRole))
+            {
+                return View("AdminHomeView");
+            }
+            else
+            {
+                return View("EmployeeHomeView");
+            }
         }
 
         public ActionResult About()
