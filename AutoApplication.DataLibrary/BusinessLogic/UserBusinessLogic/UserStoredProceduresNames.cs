@@ -9,5 +9,6 @@ namespace AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic
     public static class UserStoredProceduresNames
     {
         public static string GetRoleOfLoggedInUser { get { return "dbo.spGetRolesOfUserWhoLoggedIn @UserRoleName"; } }
+        public static string GetAllRole { get { return "dbo.spRoles_GetAllRoles"; } }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoApplication.DataLibrary.BusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.SaleBusinessLogic;
+using AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic;
 using AutoApplication.DataLibrary.DataAccess;
 using AutoApplication.DataLibrary.DataAccessServices;
 using AutoApplication.DataLibrary.Model;
@@ -10,6 +11,7 @@ using AutoApplication.ViewModel;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataProtection;
@@ -30,6 +32,8 @@ namespace AutoApplication
             builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<RoleStore<IdentityRole>>().As<IRoleStore<IdentityRole, string>>().InstancePerRequest();
+            builder.RegisterType<ApplicationRoleManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
             builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register<IDataProtectionProvider>(c => app.GetDataProtectionProvider()).InstancePerRequest();
@@ -39,11 +43,14 @@ namespace AutoApplication
             builder.RegisterType<Customer>().As<ICustomer>();
             builder.RegisterType<Payment>().As<IPayment>();
             builder.RegisterType<Sale>().As<ISale>();
+            builder.RegisterType<Roles>().As<IRoles>();
 
             builder.RegisterType<AutoSalesViewModel>();
 
             builder.RegisterType<SqlServerFindData>().As<ISqlServerFindData>();
             builder.RegisterType<AutoDataProcessor>().As<IAutoDataProcessor>();
+
+            builder.RegisterType<UserDataProcessor>().As<IUserDataProcessor>();
 
             builder.RegisterType<SqlServerDataModification>().As<ISqlServerDataModification>();
             builder.RegisterType<SalesDataProcessor>().As<ISalesDataProcessor>();

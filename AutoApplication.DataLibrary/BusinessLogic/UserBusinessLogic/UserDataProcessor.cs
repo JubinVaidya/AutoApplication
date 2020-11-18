@@ -1,4 +1,5 @@
 ﻿using AutoApplication.DataLibrary.DataAccessServices;
+using AutoApplication.DataLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,19 @@ namespace AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic
             _sqlServerFindData = sqlServerFindData;
         }
 
+        public IList<Roles> FindAllRole()
+        {
+            string sql = UserStoredProceduresNames.GetAllRole;
+            return _sqlServerFindData.FindData<Roles>(sql);
+        }
+
         public IList<string> FindUserRole(string userName)
         {
             string sql = UserStoredProceduresNames.GetRoleOfLoggedInUser;
             return _sqlServerFindData.FindData<string>(sql) ;
         }
+
+
 
     }
 }

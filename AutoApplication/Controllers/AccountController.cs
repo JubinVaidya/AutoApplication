@@ -8,6 +8,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AutoApplication.Models;
 using AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic;
+using System.Collections.Generic;
+using AutoApplication.DataLibrary.DataAccess;
+using AutoApplication.DataLibrary.DataAccessServices;
 
 namespace AutoApplication.Controllers
 {
@@ -16,23 +19,33 @@ namespace AutoApplication.Controllers
     {
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
+        private readonly ApplicationRoleManager _roleManager;
         private readonly IAuthenticationManager _authManager;
-        private readonly IUserDataProcessor _userDataProcessor;
+        IUserDataProcessor _userDataProcessor;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IAuthenticationManager authManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IAuthenticationManager authManager, ApplicationRoleManager roleManager, IUserDataProcessor userDataProcessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _authManager = authManager;
-        
+            _roleManager = roleManager;
+            _userDataProcessor = userDataProcessor;
+
         }
+
 
 
         public AccountController()
         {
         }
 
-
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager;
+            }
+        }
         public ApplicationSignInManager SignInManager
         {
             get
@@ -145,6 +158,11 @@ namespace AutoApplication.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var list = _userDataProcessor.FindAllRole();
+            List<SelectListItem> selectedItemList = new List<SelectListItem>();
+            foreach (var role in list)
+                selectedItemList.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            ViewBag.Roles = selectedItemList;
             return View();
         }
 
@@ -157,10 +175,11 @@ namespace AutoApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ComissionPercent = model.ComssionPercent };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

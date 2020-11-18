@@ -64,10 +64,21 @@ namespace AutoApplication.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "Role Name")]
+        public string RoleName { get; set; }
+
+        [Display(Name = "Commission Percent")]
+        public float ComssionPercent { get; set; }
+
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -79,6 +90,8 @@ namespace AutoApplication.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

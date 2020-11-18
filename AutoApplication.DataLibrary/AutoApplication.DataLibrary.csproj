@@ -66,7 +66,9 @@
     <Compile Include="Model\Auto.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="ModelServices\IPayment.cs" />
+    <Compile Include="ModelServices\IRoles.cs" />
     <Compile Include="Model\Payment.cs" />
+    <Compile Include="Model\Roles.cs" />
     <Compile Include="Model\Sale.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
