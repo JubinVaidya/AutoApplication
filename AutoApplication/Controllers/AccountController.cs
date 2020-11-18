@@ -175,7 +175,7 @@ namespace AutoApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ComissionPercent = model.ComssionPercent };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, CommissionPercent = model.CommissionPercent };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

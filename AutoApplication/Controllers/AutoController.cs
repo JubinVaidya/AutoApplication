@@ -32,7 +32,7 @@ namespace AutoApplication.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
-
+        [HttpGet]
         public ActionResult Index()
         {
             var data = _autoDataProcessor.LoadAutos();

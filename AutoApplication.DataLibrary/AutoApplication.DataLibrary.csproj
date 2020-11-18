@@ -49,6 +49,9 @@
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoStoredProceduresNames.cs" />
     <Compile Include="BusinessLogic\AutoBusinessLogic\IAutoDataProcessor.cs" />
     <Compile Include="BusinessLogic\CompanyRoles.cs" />
+    <Compile Include="BusinessLogic\ReportBusinessLogic\IReportDataProcessor.cs" />
+    <Compile Include="BusinessLogic\ReportBusinessLogic\ReportDataProcessor.cs" />
+    <Compile Include="BusinessLogic\ReportBusinessLogic\ReportStoredProceduresNames.cs" />
     <Compile Include="BusinessLogic\SaleBusinessLogic\ISalesDataProcessor.cs" />
     <Compile Include="BusinessLogic\SaleBusinessLogic\SalesDataProcessor.cs" />
     <Compile Include="BusinessLogic\SaleBusinessLogic\SaleStoredProcedureNames.cs" />
@@ -63,6 +66,8 @@
     <Compile Include="ModelServices\IAuto.cs" />
     <Compile Include="ModelServices\ICustomer.cs" />
     <Compile Include="ModelServices\ISale.cs" />
+    <Compile Include="ModelServices\ISalesPerson.cs" />
+    <Compile Include="ModelServices\IUserSaleCommissionReport.cs" />
     <Compile Include="Model\Auto.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="ModelServices\IPayment.cs" />
@@ -70,6 +75,8 @@
     <Compile Include="Model\Payment.cs" />
     <Compile Include="Model\Roles.cs" />
     <Compile Include="Model\Sale.cs" />
+    <Compile Include="Model\SalesPerson.cs" />
+    <Compile Include="Model\UserSaleCommissionReport.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

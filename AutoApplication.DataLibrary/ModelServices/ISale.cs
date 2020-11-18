@@ -13,7 +13,7 @@ namespace AutoApplication.DataLibrary.ModelServices
         int AutoId { get; set; }
         int CustomerID { get; set; }
         string UserId { get; set; }
-        float SalesAmount { get; set; }
+        double SalesAmount { get; set; }
         DateTime SalesDate { get; set; }
     }
 }

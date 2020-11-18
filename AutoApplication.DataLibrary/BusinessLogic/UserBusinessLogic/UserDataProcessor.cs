@@ -23,6 +23,13 @@ namespace AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic
             return _sqlServerFindData.FindData<Roles>(sql);
         }
 
+        public IList<SalesPerson> FindAllSalesPeople()
+        {
+            string sql = UserStoredProceduresNames.GetAllSalesPeople;
+            return _sqlServerFindData.FindData<SalesPerson>(sql);
+        }
+
+
         public IList<string> FindUserRole(string userName)
         {
             string sql = UserStoredProceduresNames.GetRoleOfLoggedInUser;

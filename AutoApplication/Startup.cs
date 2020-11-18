@@ -1,5 +1,6 @@
 ﻿using AutoApplication.DataLibrary.BusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
+using AutoApplication.DataLibrary.BusinessLogic.ReportBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.SaleBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic;
 using AutoApplication.DataLibrary.DataAccess;
@@ -40,16 +41,19 @@ namespace AutoApplication
 
 
             builder.RegisterType<Auto>().As<IAuto>();
+            builder.RegisterType<SalesPerson>().As<DataLibrary.ModelServices.ISalesPerson>();
             builder.RegisterType<Customer>().As<ICustomer>();
             builder.RegisterType<Payment>().As<IPayment>();
             builder.RegisterType<Sale>().As<ISale>();
             builder.RegisterType<Roles>().As<IRoles>();
+            builder.RegisterType<UserSaleCommissionReport>().As<IUserSaleCommissionReport>();
 
             builder.RegisterType<AutoSalesViewModel>();
+            builder.RegisterType<UserSaleReportViewModel>();
 
+            builder.RegisterType<ReportDataProcessor>().As<IReportDataProcessor>();
             builder.RegisterType<SqlServerFindData>().As<ISqlServerFindData>();
             builder.RegisterType<AutoDataProcessor>().As<IAutoDataProcessor>();
-
             builder.RegisterType<UserDataProcessor>().As<IUserDataProcessor>();
 
             builder.RegisterType<SqlServerDataModification>().As<ISqlServerDataModification>();

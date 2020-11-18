@@ -70,7 +70,7 @@ namespace AutoApplication.Models
         public string RoleName { get; set; }
 
         [Display(Name = "Commission Percent")]
-        public float ComssionPercent { get; set; }
+        public double? CommissionPercent { get; set; }
 
 
         [Required]

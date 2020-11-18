@@ -11,6 +11,7 @@ namespace AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic
     {
         IList<string> FindUserRole(string userName);
         IList<Roles> FindAllRole();
+        IList<SalesPerson> FindAllSalesPeople();
 
     }
 }
