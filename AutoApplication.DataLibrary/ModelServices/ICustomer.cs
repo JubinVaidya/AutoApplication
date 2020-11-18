@@ -8,7 +8,7 @@ namespace AutoApplication.DataLibrary.ModelServices
 {
     public interface ICustomer
     {
-        string CusomerState { get; set; }
+        string CustomerState { get; set; }
         string CustomerCity { get; set; }
         string CustomerFirstName { get; set; }
         int CustomerID { get; set; }

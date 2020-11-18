@@ -8,11 +8,12 @@ namespace AutoApplication.DataLibrary.ModelServices
 {
     public interface ISale
     {
+        int SaleID { get; set; }
+        int PaymentID { get; set; }
         int AutoId { get; set; }
         int CustomerID { get; set; }
-        int SaleId { get; set; }
-        int SalesAmount { get; set; }
-        DateTime SalesDate { get; set; }
         string UserId { get; set; }
+        float SalesAmount { get; set; }
+        DateTime SalesDate { get; set; }
     }
 }

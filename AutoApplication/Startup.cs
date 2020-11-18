@@ -1,5 +1,6 @@
 ﻿using AutoApplication.DataLibrary.BusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
+using AutoApplication.DataLibrary.BusinessLogic.SaleBusinessLogic;
 using AutoApplication.DataLibrary.DataAccess;
 using AutoApplication.DataLibrary.DataAccessServices;
 using AutoApplication.DataLibrary.Model;
@@ -36,12 +37,16 @@ namespace AutoApplication
 
             builder.RegisterType<Auto>().As<IAuto>();
             builder.RegisterType<Customer>().As<ICustomer>();
+            builder.RegisterType<Payment>().As<IPayment>();
             builder.RegisterType<Sale>().As<ISale>();
 
             builder.RegisterType<AutoSalesViewModel>();
 
             builder.RegisterType<SqlServerFindData>().As<ISqlServerFindData>();
             builder.RegisterType<AutoDataProcessor>().As<IAutoDataProcessor>();
+
+            builder.RegisterType<SqlServerDataModification>().As<ISqlServerDataModification>();
+            builder.RegisterType<SalesDataProcessor>().As<ISalesDataProcessor>();
 
             // REGISTER CONTROLLERS SO DEPENDENCIES ARE CONSTRUCTOR INJECTED
             builder.RegisterControllers(typeof(MvcApplication).Assembly);

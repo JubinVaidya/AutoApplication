@@ -9,11 +9,12 @@ namespace AutoApplication.DataLibrary.Model
 {
     public class Sale : ISale
     {
-        public int SaleId { get; set; }
+        public int SaleID { get; set; }
         public int AutoId { get; set; }
         public string UserId { get; set; }
         public int CustomerID { get; set; }
-        public int SalesAmount { get; set; }
+        public float SalesAmount { get; set; }
         public DateTime SalesDate { get; set; }
+        public int PaymentID { get; set; }
     }
 }

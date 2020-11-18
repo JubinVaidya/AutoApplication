@@ -11,7 +11,9 @@ namespace AutoApplication.DataLibrary.DataAccessServices
     {
        IList<T> FindData<T>(string sql);
 
-       IList<T> FindData<T>(string sql, int id);
+        int FindData(string sql);
+
+        IList<T> FindData<T>(string sql, int id);
 
 
     }

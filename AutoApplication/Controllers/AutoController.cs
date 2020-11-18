@@ -11,6 +11,7 @@ using AutoApplication.DataLibrary.Model;
 using AutoApplication.Models;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic;
+using Microsoft.AspNet.Identity;
 
 namespace AutoApplication.Controllers
 {

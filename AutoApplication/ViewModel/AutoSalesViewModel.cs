@@ -1,4 +1,6 @@
-﻿using AutoApplication.DataLibrary.ModelServices;
+﻿using AutoApplication.DataLibrary.Model;
+using AutoApplication.DataLibrary.ModelServices;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,9 @@ namespace AutoApplication.ViewModel
 {
     public class AutoSalesViewModel 
     {
-       public IAuto Auto;
-        public ICustomer Customer;
-        public ISale Sale;
-
-        public AutoSalesViewModel(IAuto auto, ICustomer customer, ISale sale)
-        {
-            Auto = auto;
-            Customer = customer;
-            Sale = sale;
-        }
-
-
+        public Auto Auto { get; set; }
+        public Customer Customer { get; set; }
+        public Payment Payment { get; set; }
+        public Sale Sale { get; set; }
     }
 }

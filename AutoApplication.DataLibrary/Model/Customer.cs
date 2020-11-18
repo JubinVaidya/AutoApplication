@@ -15,7 +15,7 @@ namespace AutoApplication.DataLibrary.Model
         public string CustomerStreetAddress { get; set; }
         public string CustomerSuiteNumber { get; set; }
         public string CustomerCity { get; set; }
-        public string CusomerState { get; set; }
+        public string CustomerState { get; set; }
         public string CustomerZipCode { get; set; }
         public string CustomerPhoneNumber { get; set; }
     }

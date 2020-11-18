@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 
 namespace AutoApplication.DataLibrary.DataAccess
 {
-   public static class SqlServerDataModification
+    public class SqlServerDataModification : ISqlServerDataModification
     {
-        public static int SaveData<T>(string sql, T data)
+        public int SaveData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(SqlServerConnection.CnnValue()))
             {

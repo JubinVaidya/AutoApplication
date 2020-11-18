@@ -18,8 +18,8 @@ namespace AutoApplication.DataLibrary.DataAccess
         {
             using (IDbConnection cnn = new SqlConnection(SqlServerConnection.CnnValue()))
             {
-                return cnn.Query<T>(sql).ToList();
-            }
+                    return cnn.Query<T>(sql).ToList();
+             }
         }
 
         public IList<T> FindData<T>(string sql, int id)
@@ -30,5 +30,12 @@ namespace AutoApplication.DataLibrary.DataAccess
             };
         }
 
+        public int FindData(string sql)
+        {
+            using (IDbConnection cnn = new SqlConnection(SqlServerConnection.CnnValue()))
+            {
+                return cnn.Query<int?>(sql).Single() ?? 0;
+            }
+        }
     }
 }

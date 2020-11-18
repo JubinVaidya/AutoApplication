@@ -390,6 +390,7 @@
     <Content Include="Views\Auto\Edit.cshtml" />
     <Content Include="Views\Auto\Index.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Sale\CreateCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
