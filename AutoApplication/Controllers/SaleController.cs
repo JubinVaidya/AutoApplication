@@ -42,7 +42,7 @@ namespace AutoApplication.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> CreateCustomer(AutoSalesViewModel autoSaleObj)
+        public async Task<ActionResult> CreateSale(AutoSalesViewModel autoSaleObj)
         {
             #region
             int custId = 1;

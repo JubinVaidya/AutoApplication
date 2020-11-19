@@ -1,0 +1,104 @@
+﻿
+@model AutoApplication.ViewModel.UserSaleReportViewModel
+@{
+    ViewBag.Title = "EmployeeIndex";
+}
+
+<h2>Details</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SalePerson.Id):
+        </th>
+
+        <td>
+            @Html.DisplayFor(model => model.SalePerson.Id)
+        </td>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SalePerson.UserName):
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.SalePerson.UserName)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.SalePerson.TotalCommission):
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.SalePerson.TotalCommission)
+        </td>
+
+    </tr>
+
+</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Auto Id")
+        </th>
+        <th>
+            @Html.Label("Sales Date")
+        </th>
+        <th>
+            @Html.Label("AutoMakerName")
+        </th>
+        <th>
+            @Html.Label("Auto Model Name")
+        </th>
+        <th>
+            @Html.Label("Auto Model Year")
+        </th>
+        <th>
+            @Html.Label("Commission Amount")
+        </th>
+        <th>
+            @Html.Label("Commission Percent")
+        </th>
+        <th>
+            @Html.Label("Sales Amount")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.UserSaleCommissionReport)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoMakerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoModelYear)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CommissionAmount)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CommissionPercent)%
+            </td>
+
+            <td>
+                $ @Html.DisplayFor(modelItem => item.SalesAmount)
+            </td>
+
+        </tr>
+    }
+</table>
+<h2>
+    @Html.ActionLink("Back", "Index", "Home")
+</h2>
+
+

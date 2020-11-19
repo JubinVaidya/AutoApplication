@@ -73,6 +73,78 @@ namespace AutoApplication.Controllers
         }
 
 
+        // GET: Auto/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Auto/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateAuto(Auto auto)
+        {
+            try
+            {
+                var highestAutoId = await _autoDataProcessor.GetHighestAutoId();
+                auto.AutoID = highestAutoId != 0 ? highestAutoId + 1 : 1000;
+                auto.AutoInStock = true;
+                await _autoDataProcessor.SaveAutoAsync(auto);
+                return View(auto);
+            }
+            catch (Exception ex)
+            {
+                //there was an error we need to log here.
+            }
+
+            if (User.IsInRole(CompanyRoles.AdminRole))
+                return View("AdminIndex", _listOfAutos);
+            else
+                return View("EmployeeIndex", _listOfAutos);
+        }
+
+        // GET: Auto/Edit/5
+        public async Task<ActionResult> Edit(int id)
+        {
+            if (User.IsInRole(CompanyRoles.AdminRole))
+                return View("AdminIndex", _listOfAutos);
+            else
+            {
+                //put a pop-up that says you dont have enough permission
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Auto auto = await _autoDataProcessor.FindAutoAsync(id);
+            if (auto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(auto);
+        }
+
+        // POST: Auto/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "AutoID,AutoModelName,AutoMakerName,AutoModelYear,AutoUsageStatus,AutoListedPrice,AutoVinNumber")] Auto auto)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(auto).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(auto);
+        }
+
+
         //// GET: Auto/Details/5
         //public async Task<ActionResult> Details(int? id)
         //{
@@ -88,59 +160,11 @@ namespace AutoApplication.Controllers
         //    return View(auto);
         //}
 
-        //// GET: Auto/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
 
-        //// POST: Auto/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "AutoID,AutoModelName,AutoMakerName,AutoModelYear,AutoUsageStatus,AutoListedPrice,AutoVinNumber")] Auto auto)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Autoes.Add(auto);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
 
-        //    return View(auto);
-        //}
 
-        //// GET: Auto/Edit/5
-        //public async Task<ActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Auto auto = await db.Autoes.FindAsync(id);
-        //    if (auto == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(auto);
-        //}
 
-        //// POST: Auto/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Edit([Bind(Include = "AutoID,AutoModelName,AutoMakerName,AutoModelYear,AutoUsageStatus,AutoListedPrice,AutoVinNumber")] Auto auto)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(auto).State = EntityState.Modified;
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(auto);
-        //}
+
 
         //// GET: Auto/Delete/5
         //public async Task<ActionResult> Delete(int? id)

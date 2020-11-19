@@ -11,7 +11,7 @@
 
 </p>
 
-@using (Html.BeginForm("CreateCustomer", "Sale", FormMethod.Post))
+@using (Html.BeginForm("CreateSale", "Sale", FormMethod.Post))
 {
 
     <div class="form-group">
@@ -30,35 +30,26 @@
         @Html.TextBoxFor(m => m.Auto.AutoListedPrice, new { @class = "form-control" })
 
     </div>
-
-
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.CustomerFirstName)
 
         @Html.TextBoxFor(m => m.Customer.CustomerFirstName, new { @class = "form-control" })
     </div>
-
-
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.CustomerLastName)
 
         @Html.TextBoxFor(m => m.Customer.CustomerLastName, new { @class = "form-control" })
     </div>
-
-
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.CustomerStreetAddress)
 
         @Html.TextBoxFor(m => m.Customer.CustomerStreetAddress, new { @class = "form-control" })
     </div>
-
-
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.CustomerSuiteNumber)
 
         @Html.TextBoxFor(m => m.Customer.CustomerSuiteNumber, new { @class = "form-control" })
     </div>
-
     <div>
         <talble>
             <tr>
@@ -183,12 +174,6 @@
         <button type="submit" class="btn btn-primary">Confirm</button>
     </div>
 }
-
-
-
-
-<form>
-</form>
 
 
 

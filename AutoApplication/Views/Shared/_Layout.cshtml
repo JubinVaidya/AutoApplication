@@ -13,16 +13,15 @@
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             </button>
-            <a class="navbar-brand" href="/">Application name</a>
+            <a class="navbar-brand" href="/">Auto Dealer</a>
             <div class="navbar-collapse collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })</li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right mr-auto">
-                    <li class="nav-item"><a href="/Account/Login" id="loginLink" class="nav-link">Log in</a></li>
+                <ul class="nav navbar-nav navbar-right mr-5">
+
+                    @Html.Partial("_LoginPartial")
+                    @*<li class="nav-item"><a href="/Account/Login" id="loginLink" class="nav-link">Log in</a></li>*@
                 </ul>
 
             </div>

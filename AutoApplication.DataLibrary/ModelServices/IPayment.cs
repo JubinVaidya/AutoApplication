@@ -1,11 +1,18 @@
-﻿namespace AutoApplication.DataLibrary.ModelServices
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AutoApplication.DataLibrary.ModelServices
 {
     public interface IPayment
     {
-        string PaymentCardExpiryDate { get; set; }
-        string PaymentCardNumber { get; set; }
+
         int PaymentID { get; set; }
+
+        string PaymentCardExpiryDate { get; set; }
+
+        string PaymentCardNumber { get; set; }
+
         string PaymentNameOnCard { get; set; }
+
         string PaymentSecurityCode { get; set; }
     }
 }

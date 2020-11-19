@@ -10,9 +10,7 @@ namespace AutoApplication.DataLibrary.DataAccessServices
     public interface ISqlServerFindData
     {
        IList<T> FindData<T>(string sql);
-
         int FindData(string sql);
-
         IList<T> FindData<T>(string sql, int id);
 
 

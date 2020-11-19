@@ -13,33 +13,26 @@ namespace AutoApplication.DataLibrary.BusinessLogic
     public class AutoDataProcessor : IAutoDataProcessor
     {
         ISqlServerFindData _sqlServerFindData;
+        ISqlServerDataModification _sqlServerDataModification;
 
-        public AutoDataProcessor(ISqlServerFindData sqlServerFindData)
+        public AutoDataProcessor(ISqlServerFindData sqlServerFindData, ISqlServerDataModification sqlServerDataModification)
         {
             _sqlServerFindData = sqlServerFindData;
+            _sqlServerDataModification = sqlServerDataModification;
         }
 
-        public async Task<IList<Auto>> FindAutoAsync(int id)
+        public async Task<Auto> FindAutoAsync(int id)
         {
             string sql = AutoStoredProceduresNames.GetAutoByID;
-            
-            return await Task.Run(() => _sqlServerFindData.FindData<Auto>(sql, id));
-
+            return await Task.Run(() => _sqlServerFindData.FindData<Auto>(sql, id).FirstOrDefault());
         }
 
-        //public static int AddAuto(int autoId, string autoMaker, string autoModelName, string autoModelYear)
-        //{
-        //    Auto data = new Auto
-        //    {
-        //        AutoID = autoId,
-        //        AutoMakerName = autoMaker,
-        //        AutoModelName = autoModelName,
-        //        AutoModelYear = autoModelYear
-        //    }
-        //    string sql = @"insert into dbo.Autos (AutoID, AutoMakerName, AutoModelName, AutoModelYear) 
-        //                   values (@AutoID, @AutoMakerName, @AutoModelName, @AutoModelYear)";
-        //    return SqlServerFindData.SaveData(sql, data);
-        //}
+        public async Task<int> GetHighestAutoId()
+        {
+            string sql = AutoStoredProceduresNames.QueryForHighestAutoID;
+            return await Task.Run(() => _sqlServerFindData.FindData(sql));
+        }
+
 
         public IList<Auto> LoadAutos()
         {
@@ -47,5 +40,10 @@ namespace AutoApplication.DataLibrary.BusinessLogic
             return _sqlServerFindData.FindData<Auto>(sql);
         }
 
+        public async Task<int> SaveAutoAsync(Auto auto)
+        {
+            string sql = AutoStoredProceduresNames.QueryToSaveAuto;
+            return await Task.Run(() => _sqlServerDataModification.SaveData(sql,auto));
+        }
     }
 }
