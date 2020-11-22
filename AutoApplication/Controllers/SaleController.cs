@@ -33,9 +33,8 @@ namespace AutoApplication.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(int id)
         {
-            IList<Auto> listAuto = await _autoDataProcessor.FindAutoAsync(id);
+            _autoSalesViewModel.Auto = await _autoDataProcessor.FindAutoAsync(id);
 
-            _autoSalesViewModel.Auto = listAuto.FirstOrDefault();
 
             return View(_autoSalesViewModel);
         }

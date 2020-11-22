@@ -13,5 +13,6 @@ namespace AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic
         Task<int> GetHighestAutoId();
         Task<Auto> FindAutoAsync(int id);
         Task<int> SaveAutoAsync(Auto auto);
+        Task<int> UpdateAutoAsync(Auto auto);
     }
 }

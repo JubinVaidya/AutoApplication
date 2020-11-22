@@ -24,7 +24,7 @@ namespace AutoApplication.DataLibrary.BusinessLogic
         public async Task<Auto> FindAutoAsync(int id)
         {
             string sql = AutoStoredProceduresNames.GetAutoByID;
-            return await Task.Run(() => _sqlServerFindData.FindData<Auto>(sql, id).FirstOrDefault());
+            return await Task.Run(() => _sqlServerFindData?.FindData<Auto>(sql, id).FirstOrDefault());
         }
 
         public async Task<int> GetHighestAutoId()
@@ -44,6 +44,12 @@ namespace AutoApplication.DataLibrary.BusinessLogic
         {
             string sql = AutoStoredProceduresNames.QueryToSaveAuto;
             return await Task.Run(() => _sqlServerDataModification.SaveData(sql,auto));
+        }
+
+        public async Task<int> UpdateAutoAsync(Auto auto)
+        {
+            string sql = AutoStoredProceduresNames.QueryToUpdateAuto;
+            return await Task.Run(() => _sqlServerDataModification.UpdateData(sql, auto));
         }
     }
 }

@@ -26,7 +26,6 @@ namespace AutoApplication.Controllers
             _listOfAutos = new List<Auto>();
         }
 
-
         /// <summary>
         /// This Method will query the database for all autos and display it in the view.
         /// </summary>
@@ -56,23 +55,6 @@ namespace AutoApplication.Controllers
                 return View("EmployeeIndex", _listOfAutos);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Details(int id)
-        {
-
-            IList<Auto> listAuto = await _autoDataProcessor.FindAutoAsync(id);
-
-            Auto auto = listAuto.FirstOrDefault();
-
-            if (auto == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(auto);
-        }
-
-
         // GET: Auto/Create
         public ActionResult Create()
         {
@@ -80,8 +62,6 @@ namespace AutoApplication.Controllers
         }
 
         // POST: Auto/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateAuto(Auto auto)
@@ -105,22 +85,38 @@ namespace AutoApplication.Controllers
                 return View("EmployeeIndex", _listOfAutos);
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
+        {
+            Auto auto = await _autoDataProcessor.FindAutoAsync(id);
+            if (auto == null)
+                return HttpNotFound();
+
+            if (User.IsInRole(CompanyRoles.AdminRole))
+                return View("AdminDetails", auto);
+            else
+                return View("Index", auto);
+        }
+
+
+
         // GET: Auto/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            Auto auto = await _autoDataProcessor.FindAutoAsync(id);
+
             if (User.IsInRole(CompanyRoles.AdminRole))
-                return View("AdminIndex", _listOfAutos);
+                return View("Edit", auto);
             else
             {
                 //put a pop-up that says you dont have enough permission
+                //and go back to home page.
             }
 
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
-            Auto auto = await _autoDataProcessor.FindAutoAsync(id);
             if (auto == null)
             {
                 return HttpNotFound();
@@ -133,72 +129,28 @@ namespace AutoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AutoID,AutoModelName,AutoMakerName,AutoModelYear,AutoUsageStatus,AutoListedPrice,AutoVinNumber")] Auto auto)
+        public async Task<ActionResult> Edit(Auto auto)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(auto).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //try to update
+                await _autoDataProcessor.UpdateAutoAsync(auto);
+
             }
+            catch (Exception)
+            {
+                //log error
+                //Display popup if possible.
+            }
+
             return View(auto);
         }
 
 
-        //// GET: Auto/Details/5
-        //public async Task<ActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Auto auto = await db.Autoes.FindAsync(id);
-        //    if (auto == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(auto);
-        //}
+        public ActionResult EditSuccessPopup()
+        {
+            return View();
+        }
 
-
-
-
-
-
-
-        //// GET: Auto/Delete/5
-        //public async Task<ActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Auto auto = await db.Autoes.FindAsync(id);
-        //    if (auto == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(auto);
-        //}
-
-        //// POST: Auto/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    Auto auto = await db.Autoes.FindAsync(id);
-        //    db.Autoes.Remove(auto);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

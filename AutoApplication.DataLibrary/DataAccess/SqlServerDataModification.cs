@@ -14,5 +14,13 @@ namespace AutoApplication.DataLibrary.DataAccess
             }
         }
 
+        public int UpdateData<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(SqlServerConnection.CnnValue()))
+            {
+                return cnn.Execute(sql, data);
+            }
+        }
+
     }
 }
