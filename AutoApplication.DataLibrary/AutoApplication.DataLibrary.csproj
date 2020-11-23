@@ -56,6 +56,7 @@
     <Compile Include="BusinessLogic\SaleBusinessLogic\ISalesDataProcessor.cs" />
     <Compile Include="BusinessLogic\SaleBusinessLogic\SalesDataProcessor.cs" />
     <Compile Include="BusinessLogic\SaleBusinessLogic\SaleStoredProcedureNames.cs" />
+    <Compile Include="BusinessLogic\StateNames.cs" />
     <Compile Include="BusinessLogic\UserBusinessLogic\IUserDataProcessor.cs" />
     <Compile Include="BusinessLogic\UserBusinessLogic\UserDataProcessor.cs" />
     <Compile Include="BusinessLogic\UserBusinessLogic\UserStoredProceduresNames.cs" />

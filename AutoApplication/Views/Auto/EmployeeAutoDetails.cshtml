@@ -1,0 +1,84 @@
+﻿@model AutoApplication.DataLibrary.Model.Auto
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+
+    .bottom_btns {
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+</style>
+
+
+<div class="container">
+
+    <h1 class="" name="AutoName">
+        @Model.AutoMakerName @Model.AutoModelName @Model.AutoModelYear
+    </h1>
+
+    <div>
+        <div>
+            <img class="center" src="http://placehold.it/750x500" alt="">
+        </div>
+        <h3 class="my-3">Car Details</h3>
+        <table class="table table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.AutoModelName):</th>
+                <td>
+                    @Html.DisplayFor(model => model.AutoModelName)
+                </td>
+            </tr>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.AutoMakerName):</th>
+                <td>
+                    @Html.DisplayFor(model => model.AutoMakerName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AutoModelYear):
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.AutoModelYear)
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoUsageStatus) &nbsp; </p>
+            <p> @Html.DisplayFor(model => model.AutoUsageStatus) </p>
+
+            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoListedPrice) &nbsp; </p>
+            <p> @Html.DisplayFor(model => model.AutoListedPrice) </p>
+
+            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoVinNumber) &nbsp; </p>
+            <p>@Html.DisplayFor(model => model.AutoVinNumber) </p>
+
+            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoInStockString) &nbsp; </p>
+            <p>@Html.DisplayFor(model => model.AutoInStockString) </p>
+
+            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoMilesTravelled) &nbsp; </p>
+            <p>@Html.DisplayFor(model => model.AutoMilesTravelled) </p>
+
+
+        </div>
+    </div>
+    <div class="bottom_btns float-right">
+        <p class"text-right">
+            @Html.ActionLink("Sale", "Index", "Sale", new { id = @Model.AutoID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+        </p>
+    </div>
+</div>
+

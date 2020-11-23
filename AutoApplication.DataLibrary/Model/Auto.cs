@@ -27,8 +27,17 @@ namespace AutoApplication.DataLibrary.Model
         [Required]
         [Display(Name = "Auto List Price")]
         public double AutoListedPrice { get; set; }
+
+        [Required]
+        [Display(Name = "Auto VIN Number")]
         public string AutoVinNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Auto Is In Stock")]
         public bool AutoInStock { get; set; }
+
+        public string AutoInStockString { get; set; }
+
         public double AutoMilesTravelled { get; set; }
     }
 }

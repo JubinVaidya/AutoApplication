@@ -5,10 +5,12 @@
 
 <h2>The Auto Was added to the inventory</h2>
 
-<p>
-    @Html.ActionLink("Add Another", "Create")
-</p>
-<p>
-    @Html.ActionLink("Home", "Index", "Home")
-</p>
+
+
+<div class="bottom_btns float-right">
+    <p class"text-right">
+        @Html.ActionLink("Add Another", "Create",null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-danger" })
+    </p>
+</div>
 

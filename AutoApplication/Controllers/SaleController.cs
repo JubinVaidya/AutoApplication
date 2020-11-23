@@ -1,8 +1,10 @@
-﻿using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
+﻿using AutoApplication.DataLibrary.BusinessLogic;
+using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic.SaleBusinessLogic;
 
 using AutoApplication.DataLibrary.Model;
 using AutoApplication.DataLibrary.ModelServices;
+using AutoApplication.Resources;
 using AutoApplication.ViewModel;
 using Microsoft.AspNet.Identity;
 using System;
@@ -33,16 +35,34 @@ namespace AutoApplication.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(int id)
         {
-            _autoSalesViewModel.Auto = await _autoDataProcessor.FindAutoAsync(id);
 
+
+            _autoSalesViewModel.Auto = await _autoDataProcessor.FindAutoAsync(id);
+           
+
+            _autoSalesViewModel.ListStateNames = Enum.GetValues(typeof(StateNames)).Cast<StateNames>();
 
             return View(_autoSalesViewModel);
+        }
+
+        public ActionResult Create(AutoSalesViewModel autoSaleObj)
+        {
+            return View(autoSaleObj);
         }
 
 
         [HttpPost]
         public async Task<ActionResult> CreateSale(AutoSalesViewModel autoSaleObj)
         {
+            var isCustomerValid = SimpleValidator.Validate(autoSaleObj.Customer);
+            var isPaymentValid = SimpleValidator.Validate(autoSaleObj.Payment);
+
+            if ( !(isCustomerValid.IsValid && isPaymentValid.IsValid))
+            {
+                autoSaleObj.ListStateNames = Enum.GetValues(typeof(StateNames)).Cast<StateNames>();
+                return View("Create", autoSaleObj);
+            }
+
             #region
             int custId = 1;
             var highestCustId = await _salesDataProcessor.GetHighestCustomerId();
@@ -74,6 +94,7 @@ namespace AutoApplication.Controllers
             autoSaleObj.Sale = new Sale();
 
 
+
             autoSaleObj.Sale.SaleID = saleId;
             autoSaleObj.Sale.AutoId = autoSaleObj.Auto.AutoID;
             autoSaleObj.Sale.SalesAmount = (float)autoSaleObj.Auto.AutoListedPrice;
@@ -83,7 +104,7 @@ namespace AutoApplication.Controllers
             autoSaleObj.Sale.SalesDate = DateTime.Now;
             await _salesDataProcessor.StoreSaleDataAsync(autoSaleObj.Sale); 
             #endregion
-            return View(_autoSalesViewModel);
+            return View("SaleComplete");
         }
 
   

@@ -58,6 +58,10 @@ namespace AutoApplication.Controllers
         // GET: Auto/Create
         public ActionResult Create()
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             return View();
         }
 
@@ -66,6 +70,10 @@ namespace AutoApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateAuto(Auto auto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", auto);
+            }
             try
             {
                 var highestAutoId = await _autoDataProcessor.GetHighestAutoId();
@@ -90,13 +98,14 @@ namespace AutoApplication.Controllers
         public async Task<ActionResult> Details(int id)
         {
             Auto auto = await _autoDataProcessor.FindAutoAsync(id);
+            auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
             if (auto == null)
                 return HttpNotFound();
 
             if (User.IsInRole(CompanyRoles.AdminRole))
-                return View("AdminDetails", auto);
+                return View("AdminAutoDetails", auto);
             else
-                return View("Index", auto);
+                return View("EmployeeAutoDetails", auto);
         }
 
 

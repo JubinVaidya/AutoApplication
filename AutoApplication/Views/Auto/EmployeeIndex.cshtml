@@ -4,7 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+
+    .vert-spacing {
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+</style>
+<h2 class="vert-spacing">Autos In Inventory</h2>
 
 <table class="table">
     <tr>
@@ -51,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.AutoVinNumber)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", "Auto", new { id = item.AutoID }, null) 
+                @Html.ActionLink("Details", "Details", new { id = item.AutoID }, new { @class = "btn btn-info" })
             </td>
         </tr>
     }

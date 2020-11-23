@@ -3,12 +3,14 @@
 @{
     ViewBag.Title = "AdminIndex";
 }
+<style>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    .vert-spacing {
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+</style> 
+<h2 class="vert-spacing">Autos In Inventory</h2>
 <table class="table">
     <tr>
         <th>
@@ -54,8 +56,8 @@
                 @Html.DisplayFor(modelItem => item.AutoVinNumber)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AutoID }) 
+                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.AutoID } , new { @class = "btn btn-info" }) 
             </td>
         </tr>
     }

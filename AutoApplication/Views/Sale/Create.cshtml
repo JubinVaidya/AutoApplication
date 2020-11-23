@@ -1,0 +1,134 @@
+﻿@model AutoApplication.ViewModel.AutoSalesViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p>
+    <h2>
+        @Model.Auto.AutoMakerName @Model.Auto.AutoModelName @Model.Auto.AutoModelYear
+    </h2>
+    <h5>Listed Price:</h5><h6>@Model.Auto.AutoListedPrice</h6>
+
+
+</p>
+
+@using (Html.BeginForm("CreateSale", "Sale", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for=@Model.Auto.AutoID>@Model.Auto.AutoID</label>
+
+    </div>
+    <div class="form-group" style="display:none">
+        @Html.LabelFor(m => m.Auto.AutoID)
+        @Html.TextBoxFor(m => m.Auto.AutoID, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group" style="display:none">
+        @Html.LabelFor(m => m.Auto.AutoListedPrice)
+        @Html.TextBoxFor(m => m.Auto.AutoListedPrice, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.Customer.CustomerFirstName)
+            @Html.TextBoxFor(m => m.Customer.CustomerFirstName, new { @class = "form-control", @placeholder = "Customer's First Name" })
+            @Html.ValidationMessageFor(m => m.Customer.CustomerFirstName, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.Customer.CustomerLastName)
+            @Html.TextBoxFor(m => m.Customer.CustomerLastName, new { @class = "form-control", @placeholder = "Customer's Last Name" })
+            @Html.ValidationMessageFor(m => m.Customer.CustomerLastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.CustomerStreetAddress)
+        @Html.TextBoxFor(m => m.Customer.CustomerStreetAddress, new { @class = "form-control", @placeholder = "Customer's Street Name" })
+        @Html.ValidationMessageFor(m => m.Customer.CustomerStreetAddress, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.CustomerSuiteNumber)
+        @Html.TextBoxFor(m => m.Customer.CustomerSuiteNumber, new { @class = "form-control", @placeholder = "Customer's Ste/Apt Number" })
+        @Html.ValidationMessageFor(m => m.Customer.CustomerSuiteNumber, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(m => m.Customer.CustomerCity)
+            @Html.TextBoxFor(m => m.Customer.CustomerCity, new { @class = "form-control", @placeholder = "Customer's City Name" })
+            @Html.ValidationMessageFor(m => m.Customer.CustomerCity, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            @Html.LabelFor(m => m.Customer.CustomerState)
+            @Html.DropDownListFor((m => m.Customer.CustomerState), new SelectList(Model.ListStateNames), "Select Customer's State", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Customer.CustomerState, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group col-md-2">
+            @Html.LabelFor(m => m.Customer.CustomerZipCode)
+            @Html.TextBoxFor(m => m.Customer.CustomerZipCode, new { @class = "form-control", @placeholder = "Customer's Zip Code" })
+            @Html.ValidationMessageFor(m => m.Customer.CustomerZipCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.CustomerPhoneNumber)
+        @Html.TextBoxFor(m => m.Customer.CustomerPhoneNumber, new { @class = "form-control", @placeholder = "Customer's Phone Number" })
+        @Html.ValidationMessageFor(m => m.Customer.CustomerPhoneNumber, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Payment.PaymentNameOnCard)
+        @Html.TextBoxFor(m => m.Payment.PaymentNameOnCard, new { @class = "form-control", @placeholder = "Name on Payment Card" })
+        @Html.ValidationMessageFor(m => m.Payment.PaymentNameOnCard, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Payment.PaymentCardNumber)
+        @Html.TextBoxFor(m => m.Payment.PaymentCardNumber, new { @class = "form-control", @placeholder = "Card Number" })
+        @Html.ValidationMessageFor(m => m.Payment.PaymentCardNumber, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Payment.PaymentCardExpiryDate)
+        <br />
+        @Html.EditorFor(m => m.Payment.PaymentCardExpiryDate, new { htmlAttributes = new { @class = "datepicker" } })
+        @Html.ValidationMessageFor(m => m.Payment.PaymentCardExpiryDate, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Payment.PaymentSecurityCode)
+        @Html.TextBoxFor(m => m.Payment.PaymentSecurityCode, new { @class = "form-control", @placeholder = "Card Payment Security Card" })
+        @Html.ValidationMessageFor(m => m.Payment.PaymentSecurityCode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="bottom_btns float-right">
+        <p class"text-right">
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            @Html.ActionLink("Back to List", "Index", "Auto", null, new { @class = "btn btn-danger" })
+        </p>
+    </div>
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2020: 2030"
+            });
+        });
+    </script>
+}
+
