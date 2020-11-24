@@ -279,6 +279,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <EmbeddedResource Include="Resources\Images\ManageInventory.jpg" />
+    <EmbeddedResource Include="Resources\Images\Report.jpg" />
+    <EmbeddedResource Include="Resources\Images\SaleACar.jpg" />
+    <EmbeddedResource Include="Resources\Images\ChangeProfile.jpg" />
+    <EmbeddedResource Include="Resources\Images\ViewDeails.jpg" />
+    <Content Include="Resources\Images\background.jpg" />
+    <Content Include="Resources\Images\Salary.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
