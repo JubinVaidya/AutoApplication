@@ -16,10 +16,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AutoModelName)
+            @Html.DisplayNameFor(model => model.AutoMakerName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AutoMakerName)
+            @Html.DisplayNameFor(model => model.AutoModelName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AutoModelYear)
@@ -40,11 +40,12 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AutoModelName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.AutoMakerName)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoModelName)
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.AutoModelYear)
             </td>

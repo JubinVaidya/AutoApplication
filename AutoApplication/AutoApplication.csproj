@@ -208,6 +208,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AutoController.cs" />
+    <Compile Include="Controllers\CustomErrorsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PopUpController.cs" />
@@ -438,12 +440,15 @@
     <Content Include="Views\Report\AdminReportIndex.cshtml" />
     <Content Include="Views\Report\Detail.cshtml" />
     <Content Include="Views\Report\EmployeeReportIndex.cshtml" />
-    <Content Include="Views\Auto\CreateAuto.cshtml" />
+    <Content Include="Views\Auto\CreateSuccess.cshtml" />
     <Content Include="Views\Auto\AdminAutoDetails.cshtml" />
     <Content Include="Views\Auto\EditSuccessPopup.cshtml" />
     <Content Include="Views\PopUp\PopUpSuccess.cshtml" />
     <Content Include="Views\Sale\Create.cshtml" />
     <Content Include="Views\Sale\SaleComplete.cshtml" />
+    <Content Include="Views\CustomErrors\Error404.cshtml" />
+    <Content Include="Views\CustomErrors\ErrorInput.cshtml" />
+    <Content Include="Views\Auto\EditSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

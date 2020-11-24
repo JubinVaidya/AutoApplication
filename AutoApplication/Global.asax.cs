@@ -7,12 +7,14 @@ using AutoApplication.DataLibrary.ModelServices;
 using Autofac;
 using Autofac.Integration.Mvc;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace AutoApplication
 {
+  
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -51,5 +53,8 @@ namespace AutoApplication
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
+
+
     }
+
 }

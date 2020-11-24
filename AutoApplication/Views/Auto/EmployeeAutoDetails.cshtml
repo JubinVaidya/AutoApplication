@@ -13,7 +13,7 @@
         margin-bottom: 1cm;
     }
 
-    .bottom_btns {
+    .vert-spacing {
         margin-top: 1cm;
         margin-bottom: 1cm;
     }
@@ -22,7 +22,7 @@
 
 <div class="container">
 
-    <h1 class="" name="AutoName">
+    <h1 class="vert-spacing" name="AutoName">
         @Model.AutoMakerName @Model.AutoModelName @Model.AutoModelYear
     </h1>
 
@@ -74,7 +74,7 @@
 
         </div>
     </div>
-    <div class="bottom_btns float-right">
+    <div class="vert-spacing float-right">
         <p class"text-right">
             @Html.ActionLink("Sale", "Index", "Sale", new { id = @Model.AutoID }, new { @class = "btn btn-primary" })
             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })

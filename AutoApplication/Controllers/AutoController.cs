@@ -58,10 +58,6 @@ namespace AutoApplication.Controllers
         // GET: Auto/Create
         public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
             return View();
         }
 
@@ -71,16 +67,15 @@ namespace AutoApplication.Controllers
         public async Task<ActionResult> CreateAuto(Auto auto)
         {
             if (!ModelState.IsValid)
-            {
                 return View("Create", auto);
-            }
+
             try
             {
                 var highestAutoId = await _autoDataProcessor.GetHighestAutoId();
                 auto.AutoID = highestAutoId != 0 ? highestAutoId + 1 : 1000;
                 auto.AutoInStock = true;
                 await _autoDataProcessor.SaveAutoAsync(auto);
-                return View(auto);
+                return View("CreateSuccess");
             }
             catch (Exception ex)
             {
@@ -93,14 +88,22 @@ namespace AutoApplication.Controllers
                 return View("EmployeeIndex", _listOfAutos);
         }
 
-
+        /// <summary>
+        /// This method will redirect the user to either Admin Side or Employee Side Depending on Credentials.
+        /// </summary>
+        /// <param name="id">Takes in an id that is used to find the corresponding Auto.</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
+
             Auto auto = await _autoDataProcessor.FindAutoAsync(id);
-            auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
+
             if (auto == null)
-                return HttpNotFound();
+                return View("Error");
+
+            auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
+        
 
             if (User.IsInRole(CompanyRoles.AdminRole))
                 return View("AdminAutoDetails", auto);
@@ -113,6 +116,7 @@ namespace AutoApplication.Controllers
         // GET: Auto/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+
             Auto auto = await _autoDataProcessor.FindAutoAsync(id);
 
             if (User.IsInRole(CompanyRoles.AdminRole))
@@ -142,8 +146,12 @@ namespace AutoApplication.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return View("Edit", auto);
+
                 //try to update
                 await _autoDataProcessor.UpdateAutoAsync(auto);
+                return View("EditSuccess");
 
             }
             catch (Exception)

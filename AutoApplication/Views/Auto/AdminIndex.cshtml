@@ -9,15 +9,15 @@
         margin-top: 1cm;
         margin-bottom: 1cm;
     }
-</style> 
+</style>
 <h2 class="vert-spacing">Autos In Inventory</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AutoModelName)
+            @Html.DisplayNameFor(model => model.AutoMakerName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AutoMakerName)
+            @Html.DisplayNameFor(model => model.AutoModelName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AutoModelYear)
@@ -38,10 +38,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AutoModelName)
+                @Html.DisplayFor(modelItem => item.AutoMakerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AutoMakerName)
+                @Html.DisplayFor(modelItem => item.AutoModelName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AutoModelYear)
@@ -57,7 +57,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Details", "Details", new { id = item.AutoID } , new { @class = "btn btn-info" }) 
+                @Html.ActionLink("Details", "Details", new { id = item.AutoID }, new { @class = "btn btn-info" })
             </td>
         </tr>
     }

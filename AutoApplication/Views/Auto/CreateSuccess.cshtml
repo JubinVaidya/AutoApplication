@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "CreateAuto";
+}
+
+<style>
+
+    .vert-spacing {
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+</style>
+<h2 class="vert-spacing">The Auto Was added to the inventory</h2>
+
+
+
+<div class="bottom_btns float-right">
+    <p class"text-right">
+        @Html.ActionLink("Add Another", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-danger" })
+    </p>
+</div>
+

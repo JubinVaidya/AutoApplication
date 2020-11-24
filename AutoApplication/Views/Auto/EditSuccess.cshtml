@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "EditSuccess";
+}
+
+
+<style>
+    .vert-spacing {
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+</style>
+
+<h2 class="vert-spacing">The Auto Was Successfully Edited</h2>
+
+
+<div class="bottom_btns float-right">
+    <p class"text-right">
+        @Html.ActionLink("Edit Another", "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Done", "Index", "Home", null, new { @class = "btn btn-danger" })
+    </p>
+</div>

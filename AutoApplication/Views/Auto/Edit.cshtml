@@ -3,14 +3,19 @@
 @{
     ViewBag.Title = "Edit";
 }
+<style>
+    .vert-spacing {
+        margin-top: 1cm;
+        margin-bottom: 1cm;
+    }
+</style>
 
-<h2>Edit</h2>
+<h2 class="vert-spacing">Edit Auto Information</h2>
 @using (Html.BeginForm("Edit", "Auto", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Auto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.AutoID)
@@ -63,14 +68,13 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="bottom_btns float-right">
+            <p class"text-right">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", "Auto", null, new { @class = "btn btn-danger" })
+            </p>
         </div>
+
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
