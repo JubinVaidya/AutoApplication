@@ -50,6 +50,7 @@
     <Compile Include="BusinessLogic\AutoBusinessLogic\AutoStoredProceduresNames.cs" />
     <Compile Include="BusinessLogic\AutoBusinessLogic\IAutoDataProcessor.cs" />
     <Compile Include="BusinessLogic\CompanyRoles.cs" />
+    <Compile Include="BusinessLogic\Configs.cs" />
     <Compile Include="BusinessLogic\ReportBusinessLogic\IReportDataProcessor.cs" />
     <Compile Include="BusinessLogic\ReportBusinessLogic\ReportDataProcessor.cs" />
     <Compile Include="BusinessLogic\ReportBusinessLogic\ReportStoredProceduresNames.cs" />

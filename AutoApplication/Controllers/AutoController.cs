@@ -12,6 +12,7 @@ using AutoApplication.Models;
 using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace AutoApplication.Controllers
 {
@@ -32,8 +33,16 @@ namespace AutoApplication.Controllers
         /// <returns></returns>
         /// 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.AutoMakerNameSortParm = String.IsNullOrEmpty(sortOrder) ? "maker_desc" : "";
+            ViewBag.AutoModelNameSortParm = sortOrder == "model_asc" ? "model_dsc" : "model_asc";
+            ViewBag.AutoYearNameSortParm = sortOrder == "model_yr_asc" ? "model_yr_dsc" : "model_yr_asc";
+            ViewBag.AutoListPriceSortParm = sortOrder == "model_price_asc" ? "model_price_dec" : "model_price_asc";
+            ViewBag.AutoUsageSortParm = sortOrder == "model_usage_asc" ? "model_usage_dsc" : "model_usage_asc";
+            ViewBag.AutoVinSortParm = sortOrder == "model_vin_asc" ? "model_vin_dsc" : "model_vin_asc";
+
             var data = _autoDataProcessor.LoadAutos();
             foreach (var auto in data)
             {
@@ -49,11 +58,93 @@ namespace AutoApplication.Controllers
                 });
             }
 
-            if (User.IsInRole(CompanyRoles.AdminRole))
-                return View("AdminIndex", _listOfAutos);
+            if (searchString != null)
+            {
+                page = 1;
+            }
             else
-                return View("EmployeeIndex", _listOfAutos);
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            //search a list based on search string
+            _listOfAutos = SelectListBySearchString(_listOfAutos, searchString?.ToLower());
+
+            //Sort the list of autos by given parameter field
+            _listOfAutos = SortArrayBySortParm(_listOfAutos, sortOrder);
+
+            int pageSize = Configs.ItemsInAPage;
+            int pageNumber = (page ?? 1);
+            if (User.IsInRole(CompanyRoles.AdminRole))
+                return View("AdminIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
+            else
+                return View("EmployeeIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
+
         }
+
+        private List<Auto> SelectListBySearchString(List<Auto> listOfAutos, string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listOfAutos = listOfAutos.Where(s =>
+                    s.AutoMakerName.ToLower().Contains(searchString) ||
+                    s.AutoModelName.ToLower().Contains(searchString) ||
+                    s.AutoModelYear.ToLower().Contains(searchString) ||
+                    s.AutoListedPrice.ToString().ToLower().Contains(searchString) ||
+                    s.AutoUsageStatus.ToString().ToLower().Contains(searchString) ||
+                    s.AutoVinNumber.ToLower().Contains(searchString)
+                    ).ToList();
+            }
+            return listOfAutos;
+        }
+
+        private List<Auto> SortArrayBySortParm(List<Auto> listOfAutos, string sortOrder)
+        {
+            switch (sortOrder)
+            {
+                case "model_vin_asc":
+                    listOfAutos = listOfAutos.OrderBy(s => s.AutoVinNumber).ToList();
+                    break;
+                case "model_vin_dsc":
+                    listOfAutos = listOfAutos.OrderByDescending(s => s.AutoVinNumber).ToList();
+                    break;
+                case "model_price_asc":
+                    listOfAutos = listOfAutos.OrderBy(s => s.AutoListedPrice).ToList();
+                    break;
+                case "model_price_dec":
+                    listOfAutos = listOfAutos.OrderByDescending(s => s.AutoListedPrice).ToList();
+                    break;
+                case "model_usage_asc":
+                    listOfAutos = listOfAutos.OrderBy(s => s.AutoUsageStatus).ToList();
+                    break;
+                case "model_usage_dsc":
+                    listOfAutos = listOfAutos.OrderByDescending(s => s.AutoUsageStatus).ToList();
+                    break;
+                case "model_yr_asc":
+                    listOfAutos = listOfAutos.OrderBy(s => s.AutoModelYear).ToList();
+                    break;
+                case "model_yr_dsc":
+                    listOfAutos = listOfAutos.OrderByDescending(s => s.AutoModelYear).ToList();
+                    break;
+                case "model_asc":
+                    listOfAutos = listOfAutos.OrderBy(s => s.AutoModelName).ToList();
+                    break;
+                case "model_dsc":
+                    listOfAutos = listOfAutos.OrderByDescending(s => s.AutoModelName).ToList();
+                    break;
+                case "maker_desc":
+                    listOfAutos = listOfAutos.OrderByDescending(s => s.AutoMakerName).ToList();
+                    break;
+                default:  // Name ascending 
+                    listOfAutos = listOfAutos.OrderBy(s => s.AutoMakerName).ToList();
+                    break;
+            }
+
+            return listOfAutos;
+        }
+
 
         // GET: Auto/Create
         public ActionResult Create()
@@ -103,7 +194,7 @@ namespace AutoApplication.Controllers
                 return View("Error");
 
             auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
-        
+
 
             if (User.IsInRole(CompanyRoles.AdminRole))
                 return View("AdminAutoDetails", auto);
