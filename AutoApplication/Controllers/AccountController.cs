@@ -11,6 +11,8 @@ using AutoApplication.DataLibrary.BusinessLogic.UserBusinessLogic;
 using System.Collections.Generic;
 using AutoApplication.DataLibrary.DataAccess;
 using AutoApplication.DataLibrary.DataAccessServices;
+using System;
+using System.Diagnostics;
 
 namespace AutoApplication.Controllers
 {
@@ -158,12 +160,27 @@ namespace AutoApplication.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var list = _userDataProcessor.FindAllRole();
-            List<SelectListItem> selectedItemList = new List<SelectListItem>();
-            foreach (var role in list)
-                selectedItemList.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
-            ViewBag.Roles = selectedItemList;
-            return View();
+
+            try
+            {
+                var list = _userDataProcessor.FindAllRole();
+                List<SelectListItem> selectedItemList = new List<SelectListItem>();
+                foreach (var role in list)
+                {
+                    if (role.Name.Length != 0)
+                    {
+                        role.Name = char.ToUpper(role.Name[0]) + role.Name.Substring(1);
+                        selectedItemList.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+                    }
+                }
+                ViewBag.Roles = selectedItemList;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Account Controller: Register threw an error", ex.ToString());
+                return RedirectToAction("Error404", "CustomErrors");
+            }
         }
 
         //

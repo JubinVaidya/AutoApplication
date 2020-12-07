@@ -14,7 +14,14 @@ namespace AutoApplication.Controllers
             return View();
         }
 
+        [Route("CustomErrors/Error404")]
         public ActionResult Error404()
+        {
+            return View();
+        }
+
+
+        public ActionResult ErrorInput()
         {
             return View();
         }

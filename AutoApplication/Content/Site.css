@@ -23,11 +23,62 @@ textarea {
     max-width: 280px;
 }
 
-.field-validation-error{
-    color:red
+.field-validation-error {
+    color: red
 }
 
 
-.input-validation-error{
-    border:2px solid red;
+.input-validation-error {
+    border: 2px solid red;
+}
+
+.car-tiles {
+    border: 2px;
+    box-shadow: 2px 2px 4px #000000;
+    max-width: 600px;
+    max-height: 300px;
+    min-height: 300px;
+    min-width: 600px;
+    border-radius: 6px;
+    margin-top: 8px;
+    padding: 0px;
+}
+
+.car-tiles-image {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    vertical-align: text-top;
+}
+
+.car-tiles-text {
+    margin: 0px;
+    height: 40px;
+    vertical-align: text-top;
+}
+
+.car-tiles-text-bold {
+    margin: 0px;
+    font-weight: bold;
+    height: 40px;
+    vertical-align: text-top;
+}
+
+.car-tiles-buttons-arrangement {
+    text-align: right;
+    vertical-align: middle;
+    height: 40px;
+    vertical-align: text-top;
+}
+
+.car-tiles-holder-table {
+    padding: 3px;
+}
+
+.car-tiles-holder-row{
+    margin: 3px;
+}
+
+.car-tiles-holder-data {
+    padding: 0 15px;
 }

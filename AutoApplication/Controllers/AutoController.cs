@@ -13,6 +13,7 @@ using AutoApplication.DataLibrary.BusinessLogic.AutoBusinessLogic;
 using AutoApplication.DataLibrary.BusinessLogic;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using System.Diagnostics;
 
 namespace AutoApplication.Controllers
 {
@@ -35,53 +36,43 @@ namespace AutoApplication.Controllers
         [HttpGet]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.AutoMakerNameSortParm = String.IsNullOrEmpty(sortOrder) ? "maker_desc" : "";
-            ViewBag.AutoModelNameSortParm = sortOrder == "model_asc" ? "model_dsc" : "model_asc";
-            ViewBag.AutoYearNameSortParm = sortOrder == "model_yr_asc" ? "model_yr_dsc" : "model_yr_asc";
-            ViewBag.AutoListPriceSortParm = sortOrder == "model_price_asc" ? "model_price_dec" : "model_price_asc";
-            ViewBag.AutoUsageSortParm = sortOrder == "model_usage_asc" ? "model_usage_dsc" : "model_usage_asc";
-            ViewBag.AutoVinSortParm = sortOrder == "model_vin_asc" ? "model_vin_dsc" : "model_vin_asc";
-
-            var data = _autoDataProcessor.LoadAutos();
-            foreach (var auto in data)
+            try
             {
-                _listOfAutos.Add(new Auto
-                {
-                    AutoID = auto.AutoID,
-                    AutoMakerName = auto.AutoMakerName,
-                    AutoModelName = auto.AutoModelName,
-                    AutoModelYear = auto.AutoModelYear,
-                    AutoListedPrice = auto.AutoListedPrice,
-                    AutoUsageStatus = auto.AutoUsageStatus,
-                    AutoVinNumber = auto.AutoVinNumber
-                });
-            }
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.AutoMakerNameSortParm = String.IsNullOrEmpty(sortOrder) ? "maker_desc" : "";
+                ViewBag.AutoModelNameSortParm = sortOrder == "model_asc" ? "model_dsc" : "model_asc";
+                ViewBag.AutoYearNameSortParm = sortOrder == "model_yr_asc" ? "model_yr_dsc" : "model_yr_asc";
+                ViewBag.AutoListPriceSortParm = sortOrder == "model_price_asc" ? "model_price_dec" : "model_price_asc";
+                ViewBag.AutoUsageSortParm = sortOrder == "model_usage_asc" ? "model_usage_dsc" : "model_usage_asc";
+                ViewBag.AutoVinSortParm = sortOrder == "model_vin_asc" ? "model_vin_dsc" : "model_vin_asc";
 
-            if (searchString != null)
+                _listOfAutos = _autoDataProcessor.LoadAutos().ToList();
+
+                if (searchString != null)
+                    page = 1;
+                else
+                    searchString = currentFilter;
+
+                ViewBag.CurrentFilter = searchString;
+
+                //search a list based on search string
+                _listOfAutos = SelectListBySearchString(_listOfAutos, searchString?.ToLower());
+
+                //Sort the list of autos by given parameter field
+                _listOfAutos = SortArrayBySortParm(_listOfAutos, sortOrder);
+
+                int pageSize = Configs.ItemsInAPage;
+                int pageNumber = (page ?? 1);
+                if (User.IsInRole(CompanyRoles.AdminRole))
+                    return View("AdminIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
+                else
+                    return View("EmployeeIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
             {
-                page = 1;
+                Debug.WriteLine("AutoController: Index threw an error", ex.ToString());
             }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            //search a list based on search string
-            _listOfAutos = SelectListBySearchString(_listOfAutos, searchString?.ToLower());
-
-            //Sort the list of autos by given parameter field
-            _listOfAutos = SortArrayBySortParm(_listOfAutos, sortOrder);
-
-            int pageSize = Configs.ItemsInAPage;
-            int pageNumber = (page ?? 1);
-            if (User.IsInRole(CompanyRoles.AdminRole))
-                return View("AdminIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
-            else
-                return View("EmployeeIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
-
+            return View();
         }
 
         private List<Auto> SelectListBySearchString(List<Auto> listOfAutos, string searchString)
@@ -201,9 +192,6 @@ namespace AutoApplication.Controllers
             else
                 return View("EmployeeAutoDetails", auto);
         }
-
-
-
         // GET: Auto/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
@@ -237,8 +225,12 @@ namespace AutoApplication.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return View("Edit", auto);
+                if (User.IsInRole(CompanyRoles.AdminRole))
+                {
+                    if (!ModelState.IsValid)
+                        return View("Edit", auto);
+                }
+
 
                 //try to update
                 await _autoDataProcessor.UpdateAutoAsync(auto);
