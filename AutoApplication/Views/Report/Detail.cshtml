@@ -3,7 +3,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="div-margin-top-bottom">Detailed Sales Report</h2>
 
 <table class="table">
     <tr>
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.SalePerson.TotalCommission):
         </th>
         <td>
-            @Html.DisplayFor(model => model.SalePerson.TotalCommission)
+            @string.Format("{0:C}", Model.SalePerson.TotalCommission)
         </td>
 
     </tr>
@@ -40,7 +40,7 @@
             @Html.Label("Sales Date")
         </th>
         <th>
-            @Html.Label("AutoMakerName")
+            @Html.Label("Auto Maker Name")
         </th>
         <th>
             @Html.Label("Auto Model Name")
@@ -49,15 +49,14 @@
             @Html.Label("Auto Model Year")
         </th>
         <th>
-            @Html.Label("Commission Amount")
+            @Html.Label("Sales Amount")
         </th>
         <th>
             @Html.Label("Commission Percent")
         </th>
         <th>
-            @Html.Label("Sales Amount")
+            @Html.Label("Commission Amount")
         </th>
-
     </tr>
 
     @foreach (var item in Model.UserSaleCommissionReport)
@@ -80,19 +79,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AutoModelYear)
             </td>
-
             <td>
-                @Html.DisplayFor(modelItem => item.CommissionAmount)
+                @string.Format("{0:C}", item.SalesAmount)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.CommissionPercent)%
             </td>
-
             <td>
-                $ @Html.DisplayFor(modelItem => item.SalesAmount)
+                @string.Format("{0:C}", item.CommissionAmount)
             </td>
-
         </tr>
     }
 </table>
@@ -102,8 +97,4 @@
         @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-danger" })
     </p>
 </div>
-<h2>
-
-   
-</h2>
 

@@ -71,8 +71,8 @@ namespace AutoApplication.Controllers
             catch (Exception ex)
             {
                 Debug.WriteLine("AutoController: Index threw an error", ex.ToString());
+                return RedirectToAction("Error404", "CustomErrors");
             }
-            return View();
         }
 
         private List<Auto> SelectListBySearchString(List<Auto> listOfAutos, string searchString)
@@ -161,13 +161,9 @@ namespace AutoApplication.Controllers
             }
             catch (Exception ex)
             {
-                //there was an error we need to log here.
+                Debug.WriteLine("AutoController: CreateAuto threw an error", ex.ToString());
+                return RedirectToAction("Error404", "CustomErrors");
             }
-
-            if (User.IsInRole(CompanyRoles.AdminRole))
-                return View("AdminIndex", _listOfAutos);
-            else
-                return View("EmployeeIndex", _listOfAutos);
         }
 
         /// <summary>
@@ -178,19 +174,25 @@ namespace AutoApplication.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
+            try
+            {
+                Auto auto = await _autoDataProcessor.FindAutoAsync(id);
+                if (auto == null)
+                    return RedirectToAction("Error404", "CustomErrors");
 
-            Auto auto = await _autoDataProcessor.FindAutoAsync(id);
-
-            if (auto == null)
-                return View("Error");
-
-            auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
+                auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
 
 
-            if (User.IsInRole(CompanyRoles.AdminRole))
-                return View("AdminAutoDetails", auto);
-            else
-                return View("EmployeeAutoDetails", auto);
+                if (User.IsInRole(CompanyRoles.AdminRole))
+                    return View("AdminAutoDetails", auto);
+                else
+                    return View("EmployeeAutoDetails", auto);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         // GET: Auto/Edit/5
         public async Task<ActionResult> Edit(int id)
