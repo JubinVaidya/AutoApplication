@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
+
 <style>
     .center {
         display: block;
@@ -60,25 +61,27 @@
             <p> @Html.DisplayFor(model => model.AutoUsageStatus) </p>
 
             <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoListedPrice) &nbsp; </p>
-            <p> @Html.DisplayFor(model => model.AutoListedPrice) </p>
+            <p> @string.Format("{0:C}", @Model.AutoListedPrice) </p>
 
             <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoVinNumber) &nbsp; </p>
             <p>@Html.DisplayFor(model => model.AutoVinNumber) </p>
-
-            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoInStockString) &nbsp; </p>
-            <p>@Html.DisplayFor(model => model.AutoInStockString) </p>
-
-            <p class="font-weight-bold">@Html.DisplayNameFor(model => model.AutoMilesTravelled) &nbsp; </p>
-            <p>@Html.DisplayFor(model => model.AutoMilesTravelled) </p>
-
 
         </div>
     </div>
     <div class="vert-spacing float-right">
         <p class"text-right">
-            @Html.ActionLink("Sale", "Index", "Sale", new { id = @Model.AutoID }, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Sale", "Index", "Sale", new { id = @Model.AutoID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Edit", "Edit", new { id = Model.AutoID }, new { @class = "btn btn-dark" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+            }
+            else
+            {
+                @Html.ActionLink("Sale", "Index", "Sale", new { id = @Model.AutoID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+            }
+
         </p>
     </div>
 </div>
-

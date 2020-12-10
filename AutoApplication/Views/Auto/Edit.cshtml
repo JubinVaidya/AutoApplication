@@ -1,14 +1,17 @@
 ﻿@model AutoApplication.DataLibrary.Model.Auto
 
-@{
-    ViewBag.Title = "Edit";
-}
 <style>
     .vert-spacing {
         margin-top: 1cm;
         margin-bottom: 1cm;
     }
 </style>
+
+@{
+    Html.RenderPartial("_SuccessPopUp");
+}
+
+
 
 <h2 class="vert-spacing">Edit Auto Information</h2>
 @using (Html.BeginForm("Edit", "Auto", FormMethod.Post))

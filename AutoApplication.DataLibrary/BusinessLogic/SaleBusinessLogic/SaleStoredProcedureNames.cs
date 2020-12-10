@@ -14,5 +14,7 @@ namespace AutoApplication.DataLibrary.BusinessLogic.SaleBusinessLogic
         public static string GetHighestCustomerID { get { return "dbo.spGetHighestCustomerId"; } }
         public static string GetHighestPaymentID { get { return "dbo.spGetHighestPaymentId"; } }
         public static string GetHighestSaleID { get { return "dbo.spGetHighestSaleId"; } }
+        public static string SalesTransaction { get { return "dbo.spSalesTransaction @CustomerID, @CustomerFirstName, @CustomerLastName, @CustomerStreetAddress, @CustomerSuiteNumber, @CustomerCity,@CustomerState, @CustomerZipCode,@CustomerPhoneNumber,@PaymentID, @PaymentNameOnCard, @PaymentCardNumber, @PaymentCardExpiryDate, @PaymentSecurityCode, @SaleID, @AutoID , @UserID,  @SalesDate ,@SalesAmount "; } }
+
     }
 }

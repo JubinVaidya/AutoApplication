@@ -16,12 +16,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
 
 .field-validation-error {
     color: red
@@ -36,7 +30,7 @@ textarea {
     border: 2px;
     box-shadow: 2px 2px 4px #000000;
     max-width: 600px;
-    max-height: 300px;
+    max-height: 400px;
     min-height: 300px;
     min-width: 600px;
     border-radius: 6px;
@@ -46,22 +40,33 @@ textarea {
 
 .car-tiles-image {
     height: 300px;
-    width: 300px;
+    width: 250px;
     object-fit: cover;
-    vertical-align: text-top;
+    vertical-align: central;
 }
 
+
+.car-tiles-row {
+    margin: 0;
+    padding: 0;
+}
 .car-tiles-text {
-    margin: 0px;
-    height: 40px;
-    vertical-align: text-top;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 .car-tiles-text-bold {
-    margin: 0px;
     font-weight: bold;
-    height: 40px;
-    vertical-align: text-top;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 .car-tiles-buttons-arrangement {
@@ -86,4 +91,16 @@ textarea {
 .div-margin-top-bottom{
     margin-bottom: 20px;
     margin-top: 20px;
+}
+
+input, select, textarea{
+    width:100%;
+}
+
+.width50{
+    width:50% !important;
+}
+
+.width20 {
+    width: 20% !important;
 }

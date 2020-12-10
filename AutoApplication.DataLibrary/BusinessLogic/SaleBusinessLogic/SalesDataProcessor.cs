@@ -48,9 +48,9 @@ namespace AutoApplication.DataLibrary.BusinessLogic.SaleBusinessLogic
         }
         public async Task<int> StoreSaleDataAsync(Sale saleObj)
         {
-            string sql = SaleStoredProcedureNames.StoreSaleInformation;
+            string sql = SaleStoredProcedureNames.SalesTransaction;
 
-            return await Task.Run(() => _sqlServerDataModification.SaveData<Sale>(sql, saleObj)); ; ;
+            return await Task.Run(() => _sqlServerDataModification.SaveData<Sale>(sql, saleObj)); 
         }
     }
 }

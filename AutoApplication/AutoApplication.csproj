@@ -218,7 +218,6 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PopUpController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -447,13 +446,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Auto\EmployeeIndex.cshtml" />
-    <Content Include="Views\Auto\AdminIndex.cshtml" />
     <Content Include="Views\Home\AdminHomeView.cshtml" />
     <Content Include="Views\Home\EmployeeHomeView.cshtml" />
-    <Content Include="Views\Auto\EmployeeAutoDetails.cshtml" />
     <Content Include="Views\Auto\Create.cshtml" />
-    <Content Include="Views\Auto\Delete.cshtml" />
     <Content Include="Views\Auto\Edit.cshtml" />
     <Content Include="Views\Auto\Index.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
@@ -461,15 +456,17 @@
     <Content Include="Views\Report\Detail.cshtml" />
     <Content Include="Views\Report\EmployeeReportIndex.cshtml" />
     <Content Include="Views\Auto\CreateSuccess.cshtml" />
-    <Content Include="Views\Auto\AdminAutoDetails.cshtml" />
     <Content Include="Views\Auto\EditSuccessPopup.cshtml" />
-    <Content Include="Views\PopUp\PopUpSuccess.cshtml" />
     <Content Include="Views\Sale\Create.cshtml" />
     <Content Include="Views\Sale\SaleComplete.cshtml" />
     <Content Include="Views\CustomErrors\Error404.cshtml" />
     <Content Include="Views\CustomErrors\ErrorInput.cshtml" />
     <Content Include="Views\Auto\EditSuccess.cshtml" />
     <Content Include="Views\Report\EmployeeSalesChart.cshtml" />
+    <Content Include="Views\Shared\_CarTiles.cshtml" />
+    <Content Include="Views\Auto\ListOfAutos.cshtml" />
+    <Content Include="Views\Auto\AutoDetails.cshtml" />
+    <Content Include="Views\Shared\_SuccessPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

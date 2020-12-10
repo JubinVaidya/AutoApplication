@@ -63,10 +63,8 @@ namespace AutoApplication.Controllers
 
                 int pageSize = Configs.ItemsInAPage;
                 int pageNumber = (page ?? 1);
-                if (User.IsInRole(CompanyRoles.AdminRole))
-                    return View("AdminIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
-                else
-                    return View("EmployeeIndex", _listOfAutos.ToPagedList(pageNumber, pageSize));
+
+                return View("ListOfAutos", _listOfAutos.ToPagedList(pageNumber, pageSize));
             }
             catch (Exception ex)
             {
@@ -157,12 +155,18 @@ namespace AutoApplication.Controllers
                 auto.AutoID = highestAutoId != 0 ? highestAutoId + 1 : 1000;
                 auto.AutoInStock = true;
                 await _autoDataProcessor.SaveAutoAsync(auto);
-                return View("CreateSuccess");
+                //return View("CreateSuccess");
+                
+                ViewBag.title = "<p> Auto Creation Completed</p>";
+                ViewBag.msg = "<p> Auto Created Successfully </p>";
+                return View("Create", auto);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("AutoController: CreateAuto threw an error", ex.ToString());
-                return RedirectToAction("Error404", "CustomErrors");
+                ViewBag.title = "<p> Error </p>";
+                ViewBag.msg = "<p> There was an error saving new auto information. Please try again.</p>";
+                return View("Create", auto);
             }
         }
 
@@ -183,15 +187,13 @@ namespace AutoApplication.Controllers
                 auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
 
 
-                if (User.IsInRole(CompanyRoles.AdminRole))
-                    return View("AdminAutoDetails", auto);
-                else
-                    return View("EmployeeAutoDetails", auto);
-            }
-            catch (Exception)
-            {
+                return View("AutoDetails", auto);
 
-                throw;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("AutoController: Details threw an error", ex.ToString());
+                return RedirectToAction("Error404", "CustomErrors");
             }
         }
         // GET: Auto/Edit/5
@@ -232,20 +234,20 @@ namespace AutoApplication.Controllers
                     if (!ModelState.IsValid)
                         return View("Edit", auto);
                 }
-
-
                 //try to update
                 await _autoDataProcessor.UpdateAutoAsync(auto);
-                return View("EditSuccess");
+                ViewBag.title = "<p> Edit Completed</p>";
+                ViewBag.msg = "<p> Auto Edited Successfully </p>";
+                return View("Edit", auto);
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //log error
-                //Display popup if possible.
+                ViewBag.title = "<p> Error </p>";
+                ViewBag.msg = "<p> There was an error editing the auto</p>";
+                return View("Edit", auto);
             }
 
-            return View(auto);
         }
 
 

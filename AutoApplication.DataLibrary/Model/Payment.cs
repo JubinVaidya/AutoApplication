@@ -18,12 +18,15 @@ namespace AutoApplication.DataLibrary.Model
 
         [Required]
         [Display(Name = "Payment Expiry Date")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public string PaymentCardExpiryDate { get; set; }
 
 
         [Required]
         [Display(Name = "Security Code")]
+        [RegularExpression(@"^.{3,}$", ErrorMessage = "Minimum 3 characters required")]
+        [StringLength(4, MinimumLength = 3, ErrorMessage = "Maximum 4 characters")]
         public string PaymentSecurityCode { get; set; }
     }
 }

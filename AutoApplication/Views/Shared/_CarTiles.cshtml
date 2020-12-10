@@ -1,0 +1,145 @@
+﻿@model IEnumerable<AutoApplication.DataLibrary.Model.Auto>
+<table>
+    @{
+        int col1 = 0;
+        int col2 = 0;
+        <tr class="car-tiles-holder-row">
+            <td class="car-tiles-holder-data">
+                <table class="car-tiles-holder-table">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (@col1 % 2 == 0)
+                                {
+                                <table class="car-tiles">
+                                    <tr>
+                                        <td rowspan="8" class="car-tiles-image">
+
+                                            <img class="car-tiles-image" src="https://www.automobilemag.com/uploads/sites/11/2019/09/2020-Toyota-Camry-TRD-in-supersonic-red-with-midnight-black-metallic-roof-4.jpg?fit=around%7C875:492">
+                                        </td>
+                                        <th colspan="2" class="car-tiles-text-bold">
+                                            @Html.DisplayFor(modelItem => item.AutoMakerName)
+                                            @Html.DisplayFor(modelItem => item.AutoModelName)
+                                            @Html.DisplayFor(modelItem => item.AutoModelYear)
+                                        </th>
+                                    </tr>
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Maker Name:</td>
+                                        <td class="car-tiles-text">@Html.DisplayFor(modelItem => item.AutoMakerName)</td>
+                                    </tr>
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Model Name:</td>
+                                        <td class="car-tiles-text">@Html.DisplayFor(modelItem => item.AutoModelName)</td>
+                                    </tr>
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Model Year:</td>
+                                        <td class="car-tiles-text"> @Html.DisplayFor(modelItem => item.AutoModelYear)</td>
+                                    </tr>
+
+
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Usage Status:</td>
+                                        <td class="car-tiles-text">@Html.DisplayFor(modelItem => item.AutoUsageStatus)</td>
+                                    </tr>
+
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Listed Prices:</td>
+                                        <td class="car-tiles-text">@string.Format("{0:C}", item.AutoListedPrice)</td>
+                                    </tr>
+
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-buttons-arrangement" colspan="3">
+
+                                            @if (User.IsInRole("admin"))
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }, new { @class = "btn btn-primary" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.AutoID }, new { @class = "btn btn-info" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Sale", "Index", "Sale", new { id = item.AutoID }, new { @class = "btn btn-primary" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.AutoID }, new { @class = "btn btn-info" })
+                                            }
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                }
+                            </td>
+                        </tr>
+                        col1 = col1 + 1;
+                    }
+                </table>
+            </td>
+            <td class="car-tiles-holder-data">
+                <table class="car-tiles-holder-table">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (@col1 % 2 != 0)
+                                {
+                                <table class="car-tiles">
+                                    <tr>
+                                        <td rowspan="8" class="car-tiles-image">
+
+                                            <img class="car-tiles-image" src="https://www.automobilemag.com/uploads/sites/11/2019/09/2020-Toyota-Camry-TRD-in-supersonic-red-with-midnight-black-metallic-roof-4.jpg?fit=around%7C875:492">
+                                        </td>
+                                        <th colspan="2" class="car-tiles-text-bold">
+                                            @Html.DisplayFor(modelItem => item.AutoMakerName)
+                                            @Html.DisplayFor(modelItem => item.AutoModelName)
+                                            @Html.DisplayFor(modelItem => item.AutoModelYear)
+                                        </th>
+                                    </tr>
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Maker Name:</td>
+                                        <td class="car-tiles-text">@Html.DisplayFor(modelItem => item.AutoMakerName)</td>
+                                    </tr>
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Model Name:</td>
+                                        <td class="car-tiles-text">@Html.DisplayFor(modelItem => item.AutoModelName)</td>
+                                    </tr>
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Model Year:</td>
+                                        <td class="car-tiles-text"> @Html.DisplayFor(modelItem => item.AutoModelYear)</td>
+                                    </tr>
+
+
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Usage Status:</td>
+                                        <td class="car-tiles-text">@Html.DisplayFor(modelItem => item.AutoUsageStatus)</td>
+                                    </tr>
+
+                                    <tr class="car-tiles-row ">
+                                        <td class="car-tiles-text-bold">Listed Prices:</td>
+                                        <td class="car-tiles-text">@string.Format("{0:C}", item.AutoListedPrice)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="car-tiles-buttons-arrangement" colspan="3">
+
+                                            @if (User.IsInRole("admin"))
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }, new { @class = "btn btn-primary" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.AutoID }, new { @class = "btn btn-info" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Sale", "Index", "Sale", new { id = item.AutoID }, new { @class = "btn btn-primary" })
+                                                @Html.ActionLink("Details", "Details", new { id = item.AutoID }, new { @class = "btn btn-info" })
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+                                }
+                            </td>
+                        </tr>
+                        col1 = col1 + 1;
+                    }
+                </table>
+            </td>
+        </tr>
+    }
+</table>
+

@@ -44,6 +44,9 @@
     <Reference Include="FakeItEasy, Version=6.0.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\AutoApplication\packages\FakeItEasy.6.2.1\lib\net45\FakeItEasy.dll</HintPath>
     </Reference>
+    <Reference Include="FizzWare.NBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5651b03e12e42c12, processorArchitecture=MSIL">
+      <HintPath>..\AutoApplication\packages\NBuilder.6.1.0\lib\net40\FizzWare.NBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
       <HintPath>..\AutoApplication\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -110,6 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AutoControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -120,6 +124,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoApplication.DataLibrary\AutoApplication.DataLibrary.csproj">
+      <Project>{7b96a5b5-f68c-444a-83cb-f00c604230ca}</Project>
+      <Name>AutoApplication.DataLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutoApplication\AutoApplication.csproj">
       <Project>{03944218-D0E1-434B-BAD3-7827E481ECE2}</Project>
       <Name>AutoApplication</Name>
