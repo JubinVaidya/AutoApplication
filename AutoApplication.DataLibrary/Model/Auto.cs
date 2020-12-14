@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,8 +37,12 @@ namespace AutoApplication.DataLibrary.Model
         [Display(Name = "Auto Is In Stock")]
         public bool AutoInStock { get; set; }
 
+        [Display(Name = "Upload Image")]
+        public string AutoImagePath { get; set; }
+
         public string AutoInStockString { get; set; }
 
+        public string ShowDialog { get; set; }
         public double AutoMilesTravelled { get; set; }
     }
 }

@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.SalePerson.TotalCommission):
         </th>
         <td>
-            @Html.DisplayFor(model => model.SalePerson.TotalCommission)
+            @string.Format("{0:C}", Model.SalePerson.TotalCommission)
         </td>
 
     </tr>
@@ -41,7 +41,7 @@
             @Html.Label("Sales Date")
         </th>
         <th>
-            @Html.Label("AutoMakerName")
+            @Html.Label("Auto Maker Name")
         </th>
         <th>
             @Html.Label("Auto Model Name")
@@ -63,38 +63,39 @@
 
     @foreach (var item in Model.UserSaleCommissionReport)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoId)
-            </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.AutoId)
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.SalesDate)
-            </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SalesDate)
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoMakerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoModelName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoModelYear)
-            </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AutoMakerName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AutoModelName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AutoModelYear)
+    </td>
+  
+    <td>
+        @string.Format("{0:C}", item.CommissionAmount)
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CommissionAmount)
-            </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CommissionPercent)%
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CommissionPercent)%
-            </td>
+    <td>
 
-            <td>
-                $ @Html.DisplayFor(modelItem => item.SalesAmount)
-            </td>
+        @string.Format("{0:C}", item.SalesAmount)
+    </td>
 
-        </tr>
+</tr>
     }
 </table>
 <div class="bottom_btns float-right">

@@ -15,8 +15,7 @@
                                 <table class="car-tiles">
                                     <tr>
                                         <td rowspan="8" class="car-tiles-image">
-
-                                            <img class="car-tiles-image" src="https://www.automobilemag.com/uploads/sites/11/2019/09/2020-Toyota-Camry-TRD-in-supersonic-red-with-midnight-black-metallic-roof-4.jpg?fit=around%7C875:492">
+                                            <img class="car-tiles-image" src="@Url.Content(item.AutoImagePath)" />
                                         </td>
                                         <th colspan="2" class="car-tiles-text-bold">
                                             @Html.DisplayFor(modelItem => item.AutoMakerName)
@@ -78,13 +77,12 @@
                     {
                         <tr>
                             <td>
-                                @if (@col1 % 2 != 0)
+                                @if (@col2 % 2 != 0)
                                 {
                                 <table class="car-tiles">
                                     <tr>
                                         <td rowspan="8" class="car-tiles-image">
-
-                                            <img class="car-tiles-image" src="https://www.automobilemag.com/uploads/sites/11/2019/09/2020-Toyota-Camry-TRD-in-supersonic-red-with-midnight-black-metallic-roof-4.jpg?fit=around%7C875:492">
+                                            <img class="car-tiles-image" src="@Url.Content(item.AutoImagePath)" />
                                         </td>
                                         <th colspan="2" class="car-tiles-text-bold">
                                             @Html.DisplayFor(modelItem => item.AutoMakerName)
@@ -135,7 +133,7 @@
                                 }
                             </td>
                         </tr>
-                        col1 = col1 + 1;
+                        col2 = col2 + 1;
                     }
                 </table>
             </td>

@@ -8,5 +8,6 @@ namespace AutoApplication.Models
     public class PopupModel
     {
         public bool ShowDialog { get; set; }
+        public string JavascriptToRun { get; set; }
     }
 }

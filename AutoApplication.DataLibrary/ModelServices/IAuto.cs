@@ -15,5 +15,6 @@ namespace AutoApplication.DataLibrary.ModelServices
         bool AutoInStock { get; set; }
         double AutoMilesTravelled { get; set; }
         string AutoInStockString { get; set; }
+        string AutoImagePath { get; set; }
     }
 }

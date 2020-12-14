@@ -1,79 +1,77 @@
 ﻿@model AutoApplication.DataLibrary.Model.Auto
 
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
 @{
-    ViewBag.Title = "Create";
+    Html.RenderPartial("_SuccessPopUp");
 }
-
-<style>
-
-    .vert-spacing {
-        margin-top: 1cm;
-        margin-bottom: 1cm;
-    }
-</style>
-
-<h2 class="vert-spacing">Add New Auto</h2>
 
 @using (Html.BeginForm("CreateAuto", "Auto", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <hr />
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.AutoModelName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AutoModelName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AutoModelName, "", new { @class = "text-danger" })
+    <div class="card card-outline-secondary" style="background-color: #FAFAFA; margin-top: 80px">
+        <div class="card-body">
+            <h3 class="text-center">Add New Auto</h3>
+            <hr />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AutoMakerName)
+                    @Html.EditorFor(model => model.AutoMakerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AutoMakerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AutoModelName)
+                    @Html.EditorFor(model => model.AutoModelName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AutoModelName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AutoModelYear)
+                    @Html.EditorFor(model => model.AutoModelYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AutoModelYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AutoUsageStatus)
+                    @Html.EditorFor(model => model.AutoUsageStatus, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AutoUsageStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AutoListedPrice)
+                    @Html.EditorFor(model => model.AutoListedPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AutoListedPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AutoVinNumber)
+                    @Html.EditorFor(model => model.AutoVinNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AutoVinNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
         </div>
     </div>
+    <br />
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AutoMakerName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AutoMakerName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AutoMakerName, "", new { @class = "text-danger" })
+    <div class="row justify-content-end">
+        <div class="col-4 width50" style="text-align: right">
+            <input type="submit" value="Create" class="btn btn-primary width20" />
+            @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-danger width20" })
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.AutoModelYear, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AutoModelYear, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AutoModelYear, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.AutoUsageStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AutoUsageStatus, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AutoUsageStatus, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.AutoListedPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AutoListedPrice, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AutoListedPrice, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.AutoVinNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AutoVinNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AutoVinNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="bottom_btns float-right">
-        <p class"text-right">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-danger" })
-        </p>
     </div>
 
 </div>

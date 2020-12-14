@@ -14,6 +14,7 @@ using AutoApplication.DataLibrary.BusinessLogic;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using System.Diagnostics;
+using System.IO;
 
 namespace AutoApplication.Controllers
 {
@@ -47,6 +48,12 @@ namespace AutoApplication.Controllers
                 ViewBag.AutoVinSortParm = sortOrder == "model_vin_asc" ? "model_vin_dsc" : "model_vin_asc";
 
                 _listOfAutos = _autoDataProcessor.LoadAutos().ToList();
+
+                foreach(var a in _listOfAutos)
+                {
+                    if (string.IsNullOrEmpty(a.AutoImagePath))
+                        a.AutoImagePath = "~/Resources/CarImages/default.jpg";
+                }
 
                 if (searchString != null)
                     page = 1;
@@ -138,6 +145,8 @@ namespace AutoApplication.Controllers
         // GET: Auto/Create
         public ActionResult Create()
         {
+            if (!User.IsInRole(CompanyRoles.AdminRole))
+                return View("EmployeeHomeView", "Home");
             return View();
         }
 
@@ -146,12 +155,17 @@ namespace AutoApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateAuto(Auto auto)
         {
+            if (!User.IsInRole(CompanyRoles.AdminRole))
+                return View("EmployeeHomeView", "Home");
+          
+
             if (!ModelState.IsValid)
                 return View("Create", auto);
 
             try
             {
                 var highestAutoId = await _autoDataProcessor.GetHighestAutoId();
+
                 auto.AutoID = highestAutoId != 0 ? highestAutoId + 1 : 1000;
                 auto.AutoInStock = true;
                 await _autoDataProcessor.SaveAutoAsync(auto);
@@ -183,6 +197,9 @@ namespace AutoApplication.Controllers
                 Auto auto = await _autoDataProcessor.FindAutoAsync(id);
                 if (auto == null)
                     return RedirectToAction("Error404", "CustomErrors");
+
+                if (string.IsNullOrEmpty(auto.AutoImagePath))
+                    auto.AutoImagePath = "~/Resources/CarImages/default.jpg";
 
                 auto.AutoInStockString = auto.AutoInStock ? "Available" : "Out Of Stock";
 
